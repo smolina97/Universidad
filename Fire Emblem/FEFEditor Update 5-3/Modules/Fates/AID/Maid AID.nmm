@@ -1,0 +1,76 @@
+#Fire Emblem Fates Character Editor
+
+INJECTOR
+Fire Emblem Fates Character Editor by RainThunder
+0x10 0x18C
+-1 -1 NULL
+44
+Character.txt
+AID
+false
+
+Bitflags (1)
+0
+4
+HEXA 19066088
+NULL
+
+Bitflags (2)
+4
+4
+HEXA 04000000
+NULL
+
+JID
+8*
+4
+TEXT
+NULL
+
+Body Model
+12*
+4
+TEXT
+NULL
+
+Body Texture
+16*
+4
+TEXT
+NULL
+
+Gear Model
+20*
+4
+TEXT
+NULL
+
+Gear Texture
+24*
+4
+TEXT
+NULL
+
+Accessory Model
+28*
+4
+TEXT
+NULL
+
+Accessory Texture
+32*
+4
+TEXT
+NULL
+
+Animation Set
+36*
+4
+TEXT
+NULL
+
+Unknown Label (Walk Style?)
+40*
+4
+TEXT
+NULL

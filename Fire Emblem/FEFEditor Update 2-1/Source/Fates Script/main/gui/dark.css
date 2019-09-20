@@ -1,0 +1,51 @@
+.menu-bar {
+	
+}
+
+.code-area {
+	-fx-background-color: gray;
+}
+
+.code-area .text {
+	-fx-text-fill: white;
+}
+
+.lineno {
+	-fx-background-color: darkgray;
+	-fx-text-fill: white;
+}
+
+.keyword {
+	-fx-fill: palegreen;
+	-fx-font-weight: bold;
+}
+
+.bracket {
+	-fx-fill: whitesmoke;
+	-fx-font-weight: bold;
+}
+
+.paren {
+	-fx-fill: whitesmoke;
+	-fx-font-weight: bold;
+}
+
+.brace {
+	-fx-fill: whitesmoke;
+	-fx-font-weight: bold;
+}
+
+.indicator {
+	-fx-fill: orange;
+	-fx-font-weight: bold;
+}
+
+.string {
+	-fx-fill: blanchedalmond;
+	-fx-font-weight: bold;
+}
+
+.restricted {
+	-fx-fill: coral;
+	-fx-font-weight: bold;
+}

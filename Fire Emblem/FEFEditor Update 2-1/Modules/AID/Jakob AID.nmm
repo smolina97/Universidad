@@ -1,0 +1,124 @@
+#Fire Emblem Fates Character Editor
+
+INJECTOR
+Fire Emblem Fates Character Editor by RainThunder
+0x4 0x1C
+-1 -1 NULL
+76
+Character.txt
+NULL
+false
+
+Bitflags (1)
+0
+4
+HEXA E1010008
+NULL
+
+Bitflags (2)
+4
+4
+HEXA 2E000000
+NULL
+
+AID
+8*
+4
+TEXT
+NULL
+
+Head Model
+12*
+4
+TEXT
+NULL
+
+Head Texture
+16*
+4
+TEXT
+NULL
+
+Hair Model
+20*
+4
+TEXT
+NULL
+
+Hair Texture
+24*
+4
+TEXT
+NULL
+
+Animation Set
+28*
+4
+TEXT
+NULL
+
+Voice Set
+32*
+4
+TEXT
+NULL
+
+Hair Color
+36
+4
+HEXA C3D2D200
+NULL
+
+JID Bitflags (1)
+40
+4
+HEXA E4EEFB00
+NULL
+
+JID Bitflags (2)
+44
+4
+HEXA 14AE873F
+NULL
+
+JID Bitflags (3)
+48
+4
+HEXA 1A060000
+NULL
+
+AID (Repeat)
+52*
+4
+TEXT
+NULL
+
+JID
+56*
+4
+TEXT
+NULL
+
+Class Model
+60*
+4
+TEXT
+NULL
+
+Class Texture
+64*
+4
+TEXT
+NULL
+
+Gear Model
+68*
+4
+TEXT
+NULL
+
+Gear Texture
+72*
+4
+TEXT
+NULL

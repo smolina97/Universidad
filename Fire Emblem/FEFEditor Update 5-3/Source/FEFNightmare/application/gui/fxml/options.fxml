@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.ToggleSwitch?>
+
+<AnchorPane prefHeight="175.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.Options">
+   <children>
+      <Label layoutX="154.0" layoutY="14.0" prefHeight="30.0" prefWidth="82.0" text="Options" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="154.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <VBox fillWidth="false" layoutY="44.0" prefHeight="200.0" prefWidth="390.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <ToggleSwitch fx:id="decompress" text="Decompress LZ11 Files">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </ToggleSwitch>
+            <ToggleSwitch fx:id="copyRaw" prefHeight="27.0" prefWidth="248.0" text="Copy Raw Data Only">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </ToggleSwitch>
+            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="380.0" spacing="5.0">
+               <children>
+                  <Label text="Module Path:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="pathBox" />
+                  <Button mnemonicParsing="false" onAction="#openPathSelection" prefHeight="33.0" prefWidth="16.0" text="..." />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

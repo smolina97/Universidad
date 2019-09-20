@@ -1,0 +1,52 @@
+#Fire Emblem Fates Character Editor
+
+INJECTOR
+AID Injector by thane98
+0x4 0x1C
+-1 -1 NULL
+28
+NULL
+AID
+false
+
+JID Bitflags
+0
+4
+HEXA 1A060000
+NULL
+
+AID
+4*
+4
+TEXT
+NULL
+
+JID
+8*
+4
+TEXT
+NULL
+
+Class Model
+12*
+4
+TEXT
+NULL
+
+Class Texture
+16*
+4
+TEXT
+NULL
+
+Gear Model
+20*
+4
+TEXT
+NULL
+
+Gear Texture
+24*
+4
+TEXT
+NULL

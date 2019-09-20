@@ -86,12 +86,12 @@ void loop() {
   PORTF = PC;
   digitalWrite(EP, 1);
   digitalWrite(LM, 1);
-  delay(1);
+  delay(500);
   digitalWrite(LM, 0);
   digitalWrite(EP, 0);
   digitalWrite(ER, 1);
   digitalWrite(LI, 1);
-  delay(1);
+  delay(500);
   digitalWrite(ER, 0);
   digitalWrite(LI, 0);
 
@@ -102,20 +102,20 @@ void loop() {
   if (digitalRead(DIVIN)) {
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     digitalWrite(LB, 1);
     digitalWrite(ER, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(ER, 0);
     digitalWrite(DIV, 1);
     digitalWrite(EU, 1);
-    delay(1);
+    delay(500);
     digitalWrite(DIV, 0);
     digitalWrite(LA, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;
@@ -124,20 +124,20 @@ void loop() {
   if (digitalRead(MULIN)) {
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     digitalWrite(LB, 1);
     digitalWrite(ER, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(ER, 0);
     digitalWrite(MUL, 1);
     digitalWrite(EU, 1);
-    delay(1);
+    delay(500);
     digitalWrite(MUL, 0);
     digitalWrite(LA, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;
@@ -151,7 +151,7 @@ void loop() {
     valor = PC + 1;
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     PC++;
@@ -161,12 +161,12 @@ void loop() {
     digitalWrite(LDA, 1);
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(ER, 0);
     digitalWrite(LDA, 0);
@@ -174,23 +174,22 @@ void loop() {
   }
 
   if (digitalRead(ADDIN)) {
-    digitalWrite(ADD, 1);
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     digitalWrite(LB, 1);
     digitalWrite(ER, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(ER, 0);
     digitalWrite(ADD, 1);
-    digitalWrite(EU, 1);
-    delay(1);
+    delay(500);
     digitalWrite(ADD, 0);
+    digitalWrite(EU, 1);
     digitalWrite(LA, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;
@@ -199,20 +198,20 @@ void loop() {
   if (digitalRead(SUBIN)) {
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
     digitalWrite(LB, 1);
     digitalWrite(ER, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(ER, 0);
     digitalWrite(SUB, 1);
     digitalWrite(EU, 1);
-    delay(1);
+    delay(500);
     digitalWrite(SUB, 0);
     digitalWrite(LA, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;
@@ -221,18 +220,13 @@ void loop() {
   if (digitalRead(OUTIN)) {
     digitalWrite(EU, 1);
     digitalWrite(LO, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LO, 0);
     digitalWrite(EU, 0);
   }
 
   if (digitalRead(HALTIN)) {
-    digitalWrite(EU, 1);
-    digitalWrite(LO, 0);
-    delay(1);
-    digitalWrite(LO, 1);
-    digitalWrite(EU, 0);
-
+   
     while (!digitalRead(BHLT)) {
       PC = 0;
     }
@@ -243,15 +237,15 @@ void loop() {
     digitalWrite(EA, 1);
     digitalWrite(LB, 1);
     digitalWrite(ADD, 1);
-    delay(1);
+    delay(500);
     digitalWrite(LB, 0);
     digitalWrite(EA, 0);
     digitalWrite(ADD, 1);
     digitalWrite(EU, 1);
-    delay(1);
+    delay(500);
     digitalWrite(ADD, 0);
     digitalWrite(LA, 1);
-    delay(1);
+    ;
     digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;

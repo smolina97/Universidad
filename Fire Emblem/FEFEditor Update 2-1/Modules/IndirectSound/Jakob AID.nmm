@@ -1,0 +1,34 @@
+#Fire Emblem Fates Character Editor
+
+INJECTOR
+Fire Emblem Fates IndirectSound Injector
+0x10 0x24
+0x20 0x0 WORD
+32
+NULL
+NULL
+true
+
+Unknown
+0
+4
+HEXA 01000000
+NULL
+
+Sound Name
+4*
+4
+TEXT
+NULL
+
+Sound Name (2)
+8*
+4
+TEXT
+NULL
+
+Unknown (2)
+12
+4
+HEXA 58180000
+NULL
