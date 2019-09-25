@@ -29,7 +29,7 @@
 #define BHLT 48
 #define EP 7
 
-int MODINT;
+unsigned int MODULO;
 int numero2;
 int numero;
 int PC;
@@ -119,73 +119,78 @@ void loop() {
     delay(1);
     digitalWrite(LB, 1);
     digitalWrite(ER, 0);
+    digitalWrite(MD, 1);
     delay(1);
     numero2 = PINJ;
     digitalWrite(LB, 0);
-    MODINT = (numero % numero2);
-    Serial.println(MODINT);
-    digitalWrite(MD, 1);
+    MODULO = (numero % numero2);
+    Serial.print("modulo = ");
+    Serial.println(MODULO);
     delay(1);
-    PORTD = MODINT;
-    digitalWrite(LO, 1);
+    PORTD = MODULO;
+    digitalWrite(LA, 1);
     delay(1);
     digitalWrite(MD, 0);
-    digitalWrite(LO, 0);
-    PC;
+    digitalWrite(LA, 0);
+    PC++;
   }
 
   if (digitalRead(DIVIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
+    delay(1);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
     numero2 = PINJ;
+
     if (numero2 == 0) {
       digitalWrite(ERROR, 1);
+      Serial.print("ERROR DIVISION POR 0");
       PC = 0;
     } else {
       digitalWrite(LB, 0);
-      digitalWrite(DIV, 1);
+      delay(1);
       digitalWrite(EU, 1);
+      digitalWrite(DIV, 1);
       delay(1);
       digitalWrite(DIV, 0);
       digitalWrite(LA, 1);
       delay(1);
-      digitalWrite(LA, 0);
       digitalWrite(EU, 0);
+      digitalWrite(LA, 0);
       PC++;
     }
   }
 
   if (digitalRead(MULIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
+    delay(1);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
     digitalWrite(LB, 0);
-    digitalWrite(MUL, 1);
+    delay(1);
     digitalWrite(EU, 1);
+    digitalWrite(MUL, 1);
     delay(1);
     digitalWrite(MUL, 0);
     digitalWrite(LA, 1);
     delay(1);
-    digitalWrite(LA, 0);
     digitalWrite(EU, 0);
+    digitalWrite(LA, 0);
     PC++;
-  }
-
-  if (digitalRead(RETURNIN)) {
-    PC = valor;
   }
 
   if (digitalRead(GOTOIN)) {
@@ -198,58 +203,75 @@ void loop() {
     PC++;
   }
 
+  if (digitalRead(RETURNIN)) {
+
+    PC = valor;
+  }
+
   if (digitalRead(LDAIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
+    delay(1);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
     digitalWrite(LB, 0);
+    delay(1);
     digitalWrite(EU, 1);
     delay(1);
+    digitalWrite(LA, 1);
+    delay(1);
     digitalWrite(EU, 0);
+    digitalWrite(LA, 0);
     PC++;
   }
 
   if (digitalRead(ADDIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
+    delay(1);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
     digitalWrite(LB, 0);
-    digitalWrite(ADD, 1);
+    delay(1);
     digitalWrite(EU, 1);
+    digitalWrite(ADD, 1);
     delay(1);
     digitalWrite(ADD, 0);
     digitalWrite(LA, 1);
     delay(1);
-    digitalWrite(LA, 0);
     digitalWrite(EU, 0);
+    digitalWrite(LA, 0);
     PC++;
   }
 
   if (digitalRead(SUBIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
     digitalWrite(LM, 0);
     digitalWrite(EI, 0);
+    delay(1);
     digitalWrite(ER, 1);
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
     digitalWrite(LB, 0);
-    digitalWrite(SUB, 1);
+    delay(1);
     digitalWrite(EU, 1);
+    digitalWrite(SUB, 1);
     delay(1);
     digitalWrite(SUB, 0);
     digitalWrite(LA, 1);
@@ -257,10 +279,10 @@ void loop() {
     digitalWrite(EU, 0);
     digitalWrite(LA, 0);
     PC++;
-
   }
 
   if (digitalRead(OUTIN)) {
+
     digitalWrite(EU, 1);
     digitalWrite(LO, 1);
     delay(1);
@@ -270,20 +292,22 @@ void loop() {
   }
 
   if (digitalRead(HALTIN)) {
+
     while (!digitalRead(BHLT)) {
       PC = 0;
     }
   }
 
   if (digitalRead(POT2IN)) {
+
     digitalWrite(EA, 1);
     digitalWrite(LB, 1);
     delay(1);
-    digitalWrite(ER, 0);
     digitalWrite(LB, 0);
     digitalWrite(EA, 0);
-    digitalWrite(MUL, 1);
+    delay(1);
     digitalWrite(EU, 1);
+    digitalWrite(MUL, 1);
     delay(1);
     digitalWrite(MUL, 0);
     digitalWrite(LA, 1);
