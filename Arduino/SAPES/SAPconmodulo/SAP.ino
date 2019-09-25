@@ -7,7 +7,7 @@
 #define RETURNIN 34
 #define GOTOIN 33
 #define LDAIN 47
-#define ERROR   22
+#define LDA   22
 #define ADDIN 46
 #define ADD   28
 #define SUBIN 45
@@ -26,7 +26,7 @@
 #define LO 52
 #define EA 53
 #define MD 32
-#define BHLT 48
+#define BHLT 1
 #define EP 7
 
 int MODINT;
@@ -41,7 +41,6 @@ void setup() {
   DDRK = B00000000;
   DDRJ = B00000000;
   DDRD = B11111111;
-  pinMode(BHLT, INPUT);
   pinMode(MODIN, INPUT);
   pinMode(MOD, OUTPUT);
   pinMode(DIVIN, INPUT);
@@ -51,7 +50,7 @@ void setup() {
   pinMode(RETURNIN, INPUT);
   pinMode(GOTOIN, INPUT);
   pinMode(LDAIN, INPUT);
-  pinMode(ERROR, OUTPUT);
+  pinMode(LDA, OUTPUT);
   pinMode(ADDIN, INPUT);
   pinMode(ADD, OUTPUT);
   pinMode(SUBIN, INPUT);
@@ -59,6 +58,7 @@ void setup() {
   pinMode(OUTIN, INPUT);
   pinMode(HALTIN, INPUT);
   pinMode(POT2IN, INPUT);
+  pinMode(BHLT, INPUT);
   pinMode(MD, OUTPUT);
   pinMode(POT2, OUTPUT);
   pinMode(LM, OUTPUT);
@@ -76,7 +76,7 @@ void setup() {
   digitalWrite(MOD, 0);
   digitalWrite(DIV, 0);
   digitalWrite(MUL, 0);
-  digitalWrite(ERROR, 0);
+  digitalWrite(LDA, 0);
   digitalWrite(ADD, 0);
   digitalWrite(SUB, 0);
   digitalWrite(POT2, 0);
@@ -108,7 +108,6 @@ void loop() {
   digitalWrite(LI, 0);
 
   if (digitalRead(MODIN)) {
-
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
@@ -119,12 +118,12 @@ void loop() {
     delay(1);
     digitalWrite(LB, 1);
     digitalWrite(ER, 0);
+    digitalWrite(MD, 1);
     delay(1);
     numero2 = PINJ;
     digitalWrite(LB, 0);
     MODINT = (numero % numero2);
     Serial.println(MODINT);
-    digitalWrite(MD, 1);
     delay(1);
     PORTD = MODINT;
     digitalWrite(LO, 1);
@@ -144,22 +143,16 @@ void loop() {
     digitalWrite(LB, 1);
     delay(1);
     digitalWrite(ER, 0);
-    numero2 = PINJ;
-    if (numero2 == 0) {
-      digitalWrite(ERROR, 1);
-      PC = 0;
-    } else {
-      digitalWrite(LB, 0);
-      digitalWrite(DIV, 1);
-      digitalWrite(EU, 1);
-      delay(1);
-      digitalWrite(DIV, 0);
-      digitalWrite(LA, 1);
-      delay(1);
-      digitalWrite(LA, 0);
-      digitalWrite(EU, 0);
-      PC++;
-    }
+    digitalWrite(LB, 0);
+    digitalWrite(DIV, 1);
+    digitalWrite(EU, 1);
+    delay(1);
+    digitalWrite(DIV, 0);
+    digitalWrite(LA, 1);
+    delay(1);
+    digitalWrite(LA, 0);
+    digitalWrite(EU, 0);
+    PC++;
   }
 
   if (digitalRead(MULIN)) {
@@ -210,12 +203,15 @@ void loop() {
     digitalWrite(ER, 0);
     digitalWrite(LB, 0);
     digitalWrite(EU, 1);
+    digitalWrite(LA, 1);
     delay(1);
+    digitalWrite(LA, 0);
     digitalWrite(EU, 0);
     PC++;
   }
 
   if (digitalRead(ADDIN)) {
+
     digitalWrite(EI, 1);
     digitalWrite(LM, 1);
     delay(1);
@@ -274,7 +270,6 @@ void loop() {
       PC = 0;
     }
   }
-
   if (digitalRead(POT2IN)) {
     digitalWrite(EA, 1);
     digitalWrite(LB, 1);
