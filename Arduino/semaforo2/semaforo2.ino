@@ -40,21 +40,42 @@ void loop() {
   digitalWrite (PEAR, 1);
   digitalWrite (PEAV, 0);
   delay(500);
-  Serial.println(Tactual - Tinicial);
-  Serial.println(Tinicial);
 
   if (digitalRead(boton) == 1) {
     activo = 1;
   }
 
   if ( activo == 1) {
-    Serial.println("espera");
     sem();
   }
+
+  if (digitalRead(Verde)== 1){ 
+    Serial.println("Verde");
+  }
+   
+  if (digitalRead(Rojo)== 1){
+    Serial.println("Rojo");
+  }
+   
+  if (digitalRead(Amarillo)== 1){
+    Serial.println("Amarillo");
+  }
+
+  if (digitalRead(PEAR)== 1){
+    Serial.println("PEAR");
+  }
+   
+  if (digitalRead(PEAV)== 1){
+    Serial.println("PEAV");
+  }
+
 }
 
 
 void sem() {
+
+  
+
 
   if (Tactual - Tinicial >= cambio) {
     while (tiempo < 3) {
@@ -67,6 +88,7 @@ void sem() {
       delay(500);
       tiempo++;
     }
+
     tiempo = 0;
     while (tiempo < 3) {
       delay(500);
@@ -78,6 +100,7 @@ void sem() {
       delay(500);
       tiempo++;
     }
+
     tiempo = 0;
     while (tiempo < 2) {
       digitalWrite (Rojo, 1);
@@ -88,6 +111,7 @@ void sem() {
       delay(500);
       tiempo++;
     }
+
     tiempo = 0;
     while (tiempo < 3) {
       delay(500);
@@ -101,7 +125,6 @@ void sem() {
     }
 
     tiempo = 0;
-
     while (tiempo2 < 3) {
       delay(500);
       digitalWrite (PEAV, 1);
