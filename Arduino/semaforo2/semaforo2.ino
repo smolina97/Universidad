@@ -1,3 +1,6 @@
+#include <Wire.h>
+
+#define SLAVE_ADDRESS 0x06
 #define Rojo 27
 #define Amarillo 28
 #define Verde 29
@@ -14,6 +17,9 @@ int cambio = 15000;
 int activo = 0;
 
 void setup() {
+
+  Wire.begin(SLAVE_ADDRESS);
+  Wire.onRequest(controlador);
 
   pinMode (Rojo, OUTPUT);
   pinMode (Amarillo, OUTPUT);
@@ -48,37 +54,39 @@ void loop() {
   if ( activo == 1) {
     sem();
   }
+  controlador();
+  
+}
 
-  if (digitalRead(Verde)== 1){ 
-    Serial.println("Verde");
+void controlador(){
+
+if (digitalRead(Verde)== 1){ 
+    Wire.write(1);
   }
    
   if (digitalRead(Rojo)== 1){
-    Serial.println("Rojo");
+    Wire.write(2);
   }
    
   if (digitalRead(Amarillo)== 1){
-    Serial.println("Amarillo");
+    Wire.write(3);
   }
 
   if (digitalRead(PEAR)== 1){
-    Serial.println("PEAR");
+    Wire.write(4);
   }
    
   if (digitalRead(PEAV)== 1){
-    Serial.println("PEAV");
+    Wire.write(5);
   }
 
 }
 
-
 void sem() {
-
-  
-
 
   if (Tactual - Tinicial >= cambio) {
     while (tiempo < 3) {
+      controlador();
       delay(600);
       digitalWrite (Rojo, 0);
       digitalWrite (Amarillo, 0);
@@ -91,6 +99,7 @@ void sem() {
 
     tiempo = 0;
     while (tiempo < 3) {
+      controlador();
       delay(500);
       digitalWrite (Rojo, 0);
       digitalWrite (Amarillo, 1);
@@ -103,6 +112,7 @@ void sem() {
 
     tiempo = 0;
     while (tiempo < 2) {
+      controlador();
       digitalWrite (Rojo, 1);
       digitalWrite (Amarillo, 0);
       digitalWrite (Verde, 0);
@@ -113,7 +123,8 @@ void sem() {
     }
 
     tiempo = 0;
-    while (tiempo < 3) {
+    while (tiempo < 3){
+      controlador();
       delay(500);
       digitalWrite (Rojo, 1);
       digitalWrite (Amarillo, 0);
@@ -126,6 +137,7 @@ void sem() {
 
     tiempo = 0;
     while (tiempo2 < 3) {
+      controlador();
       delay(500);
       digitalWrite (PEAV, 1);
       delay(500);
@@ -133,6 +145,8 @@ void sem() {
       delay(500);
       tiempo2++;
     }
+
+    controlador();
     digitalWrite (Rojo, 1);
     digitalWrite (PEAR, 1);
     delay(600);
