@@ -52,6 +52,7 @@ void loop()
   if (digitalRead(boton) == 1)
   {
     activo = 1;
+    Wire.write(0);
   }
 
   if (activo == 1)
