@@ -52,7 +52,7 @@ void loop()
   if (digitalRead(boton) == 1)
   {
     activo = 1;
-    Wire.write(0);
+    Wire.write(0x00);
   }
 
   if (activo == 1)
@@ -67,27 +67,27 @@ void controlador()
 
   if (digitalRead(Verde) == 1)
   {
-    Wire.write(1);
+    Wire.write(0x01);
   }
 
   if (digitalRead(Rojo) == 1)
   {
-    Wire.write(2);
+    Wire.write(0x02);
   }
 
   if (digitalRead(Amarillo) == 1)
   {
-    Wire.write(3);
+    Wire.write(0x03);
   }
 
   if (digitalRead(PEAR) == 1)
   {
-    Wire.write(4);
+    Wire.write(0x04);
   }
 
   if (digitalRead(PEAV) == 1)
   {
-    Wire.write(5);
+    Wire.write(0x05);
   }
 }
 
