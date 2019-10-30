@@ -16,139 +16,154 @@ long Tinicial = 0;
 int cambio = 15000;
 int activo = 0;
 
-void setup() {
+void setup()
+{
 
   Wire.begin(SLAVE_ADDRESS);
   Wire.onRequest(controlador);
 
-  pinMode (Rojo, OUTPUT);
-  pinMode (Amarillo, OUTPUT);
-  pinMode (Verde, OUTPUT);
-  pinMode (PEAR, OUTPUT);
-  pinMode (PEAV, OUTPUT);
-  pinMode (boton, INPUT);
-  digitalWrite (Rojo, 0);
-  digitalWrite (Amarillo, 0);
-  digitalWrite (Verde, 0);
-  digitalWrite (PEAR, 0);
-  digitalWrite (PEAV, 0);
+  pinMode(Rojo, OUTPUT);
+  pinMode(Amarillo, OUTPUT);
+  pinMode(Verde, OUTPUT);
+  pinMode(PEAR, OUTPUT);
+  pinMode(PEAV, OUTPUT);
+  pinMode(boton, INPUT);
+  digitalWrite(Rojo, 0);
+  digitalWrite(Amarillo, 0);
+  digitalWrite(Verde, 0);
+  digitalWrite(PEAR, 0);
+  digitalWrite(PEAV, 0);
 
   Serial.begin(9600);
 }
 
-void loop() {
+void loop()
+{
 
   Tactual = millis();
   delay(600);
-  digitalWrite (Rojo, 0);
-  digitalWrite (Amarillo, 0);
-  digitalWrite (Verde, 1);
-  digitalWrite (PEAR, 1);
-  digitalWrite (PEAV, 0);
+  digitalWrite(Rojo, 0);
+  digitalWrite(Amarillo, 0);
+  digitalWrite(Verde, 1);
+  digitalWrite(PEAR, 1);
+  digitalWrite(PEAV, 0);
   delay(500);
 
-  if (digitalRead(boton) == 1) {
+  if (digitalRead(boton) == 1)
+  {
     activo = 1;
   }
 
-  if ( activo == 1) {
+  if (activo == 1)
+  {
     sem();
   }
   controlador();
-  
 }
 
-void controlador(){
+void controlador()
+{
 
-if (digitalRead(Verde)== 1){ 
+  if (digitalRead(Verde) == 1)
+  {
     Wire.write(1);
   }
-   
-  if (digitalRead(Rojo)== 1){
+
+  if (digitalRead(Rojo) == 1)
+  {
     Wire.write(2);
   }
-   
-  if (digitalRead(Amarillo)== 1){
+
+  if (digitalRead(Amarillo) == 1)
+  {
     Wire.write(3);
   }
 
-  if (digitalRead(PEAR)== 1){
+  if (digitalRead(PEAR) == 1)
+  {
     Wire.write(4);
   }
-   
-  if (digitalRead(PEAV)== 1){
+
+  if (digitalRead(PEAV) == 1)
+  {
     Wire.write(5);
   }
-
 }
 
-void sem() {
+void sem()
+{
 
-  if (Tactual - Tinicial >= cambio) {
-    while (tiempo < 3) {
+  if (Tactual - Tinicial >= cambio)
+  {
+    while (tiempo < 3)
+    {
       controlador();
       delay(600);
-      digitalWrite (Rojo, 0);
-      digitalWrite (Amarillo, 0);
-      digitalWrite (Verde, 1);
-      digitalWrite (PEAR, 1);
-      digitalWrite (PEAV, 0);
+      digitalWrite(Rojo, 0);
+      digitalWrite(Amarillo, 0);
+      digitalWrite(Verde, 1);
+      digitalWrite(PEAR, 1);
+      digitalWrite(PEAV, 0);
       delay(500);
       tiempo++;
     }
 
     tiempo = 0;
-    while (tiempo < 3) {
+    while (tiempo < 3)
+    {
       controlador();
       delay(500);
-      digitalWrite (Rojo, 0);
-      digitalWrite (Amarillo, 1);
-      digitalWrite (Verde, 0);
-      digitalWrite (PEAR, 1);
-      digitalWrite (PEAV, 0);
+      digitalWrite(Rojo, 0);
+      digitalWrite(Amarillo, 1);
+      digitalWrite(Verde, 0);
+      digitalWrite(PEAR, 1);
+      digitalWrite(PEAV, 0);
       delay(500);
       tiempo++;
     }
 
     tiempo = 0;
-    while (tiempo < 2) {
+    while (tiempo < 2)
+    {
       controlador();
-      digitalWrite (Rojo, 1);
-      digitalWrite (Amarillo, 0);
-      digitalWrite (Verde, 0);
-      digitalWrite (PEAR, 1);
-      digitalWrite (PEAV, 0);
+      digitalWrite(Rojo, 1);
+      digitalWrite(Amarillo, 0);
+      digitalWrite(Verde, 0);
+      digitalWrite(PEAR, 1);
+      digitalWrite(PEAV, 0);
       delay(500);
       tiempo++;
     }
 
     tiempo = 0;
-    while (tiempo < 3){
+    while (tiempo < 3)
+    {
       controlador();
       delay(500);
-      digitalWrite (Rojo, 1);
-      digitalWrite (Amarillo, 0);
-      digitalWrite (Verde, 0);
-      digitalWrite (PEAR, 0);
-      digitalWrite (PEAV, 1);
+      digitalWrite(Rojo, 1);
+      digitalWrite(Amarillo, 0);
+      digitalWrite(Verde, 0);
+      digitalWrite(PEAR, 0);
+      digitalWrite(PEAV, 1);
       delay(500);
       tiempo++;
     }
 
     tiempo = 0;
-    while (tiempo2 < 3) {
+    while (tiempo2 < 3)
+    {
       controlador();
       delay(500);
-      digitalWrite (PEAV, 1);
+      digitalWrite(PEAV, 1);
       delay(500);
-      digitalWrite (PEAV, 0);
+      digitalWrite(PEAV, 0);
       delay(500);
       tiempo2++;
     }
 
     controlador();
-    digitalWrite (Rojo, 1);
-    digitalWrite (PEAR, 1);
+    digitalWrite(Rojo, 1);
+    digitalWrite(PEAR, 1);
     delay(600);
     tiempo = 0;
     tiempo2 = 0;
