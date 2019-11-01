@@ -61,53 +61,48 @@ while True:
             self.tinfo.insert("1.0", texto_info)
 
             window.mainloop()
+            global start
+            global info
+            now = time()
+            color = self.color.get()
+            pcolor = self.pcolor.get()
 
+            if int(now - start) >= 15 and pcolor == "Peaton Rojo":
+                info = "Aprete en boton para que el semaforo cambie: " + str(int(now - start))
+            else:
+                info = "Tiempo en Verde: " + str(int(now - start))
 
-    def on_RadioChange(self):
+            if color == "Rojo":
+                self.canvas.itemconfig(self.car_red, fill="red")
+                self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+                self.canvas.itemconfig(self.car_green, fill="darkgreen")
+                start = now
 
-        global start
-        global info
-        now = time()
-        color = self.color.get()
-        pcolor = self.pcolor.get()
+            elif color == "Amarillo":
+                self.canvas.itemconfig(self.car_red, fill="darkred")
+                self.canvas.itemconfig(self.car_yellow, fill="yellow")
+                self.canvas.itemconfig(self.car_green, fill="darkgreen")
 
-        if int(now - start) >= 15 and pcolor == "Peaton Rojo":
-            info = "Aprete en boton para que el semaforo cambie: " + str(int(now - start))
-        else:
-            info = "Tiempo en Verde: " + str(int(now - start))
+            elif color == "Verde":
+                self.canvas.itemconfig(self.car_red, fill="darkred")
+                self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+                self.canvas.itemconfig(self.car_green, fill="lime")
 
-        if color == "Rojo":
-            self.canvas.itemconfig(self.car_red, fill="red")
-            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
-            self.canvas.itemconfig(self.car_green, fill="darkgreen")
-            start = now
+            if pcolor == "Peaton Rojo":
+                self.canvas.itemconfig(self.pedestrian_red, fill="red")
+                self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
 
-        elif color == "Amarillo":
-            self.canvas.itemconfig(self.car_red, fill="darkred")
-            self.canvas.itemconfig(self.car_yellow, fill="yellow")
-            self.canvas.itemconfig(self.car_green, fill="darkgreen")
+            elif pcolor == "Peaton Verde":
+                self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+                self.canvas.itemconfig(self.pedestrian_green, fill="lime")
+                info = "Peaton en Verde"
 
-        elif color == "Verde":
-            self.canvas.itemconfig(self.car_red, fill="darkred")
-            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
-            self.canvas.itemconfig(self.car_green, fill="lime")
+            texto_info = "Semaforo Carros: " + color + "\n"
+            texto_info += "Semaforo Peatonal: " + pcolor + "\n"
+            texto_info += info
 
-        if pcolor == "Peaton Rojo":
-            self.canvas.itemconfig(self.pedestrian_red, fill="red")
-            self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
-
-        elif pcolor == "Peaton Verde":
-            self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
-            self.canvas.itemconfig(self.pedestrian_green, fill="lime")
-            info = "Peaton en Verde"
-
-        texto_info = "Semaforo Carros: " + color + "\n"
-        texto_info += "Semaforo Peatonal: " + pcolor + "\n"
-        texto_info += info
-
-        self.tinfo.delete("1.0", END)
-        self.tinfo.insert("1.0", texto_info)
-        self.tinfo.after(1000, self.on_RadioChange)
-
+            self.tinfo.delete("1.0", END)
+            self.tinfo.insert("1.0", texto_info)
+            self.tinfo.after(1000, self.__init__())
 
     TrafficLights()
