@@ -30,23 +30,23 @@ class TrafficLights:
         self.pcolor = StringVar()
 
         if number == 0x01:
-            self.color = "Rojo"
+            self.color.set("Rojo")
             self.on_RadioChange()
 
         elif number == 0x02:
-            self.color = "Amarillo"
+            self.color.set("Amarillo")
             self.on_RadioChange()
 
         elif number == 0x03:
-            self.color = "Verde"
+            self.color.set("Verde")
             self.on_RadioChange()
 
         elif number == 0x04:
-            self.pcolor = "Peaton Rojo"
+            self.pcolor.set("Peaton Rojo")
             self.on_RadioChange()
 
         elif number == 0x05:
-            self.pcolor = "Peaton Verde"
+            self.pcolor.set("Peaton Verde")
             self.on_RadioChange()
 
         self.canvas = Canvas(window, width=150, height=200, bg="black")
