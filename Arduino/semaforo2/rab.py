@@ -1,142 +1,111 @@
 from tkinter import *
-from tkinter import ttk
-
+from time import *
 import smbus
 import time
-# for RPI version 1, use “bus = smbus.SMBus(0)”
+
 bus = smbus.SMBus(1)
-
-# This is the address we setup in the Arduino Program
 address = 0x06
-
-def readNumber():
-number = bus.read_byte(address)
-# number = bus.read_byte_data(address, 1)
-return number
-
-while True:
-var = input(“Enter 1 – 9: “)
-if not var:
-continue
-
-number = readNumber()
-print “Arduino: Hey RPI, I received a digit “, number
-
-if number =  0x00
+start = time
+info = " "
 
 
-class Aplicacion():
+class TrafficLights:
+
     def __init__(self):
 
-        self.raiz = Tk()
-        self.raiz.geometry('800x600')
+        number = bus.read_byte(address)
+        window = Tk()
+        window.title("Traffic Lights")
+        window.resizable(width=False, height=False)
+        frame = Frame(window)
+        frame.pack()
 
-        self.raiz.resizable(width=True, height=True)
-        self.raiz.title('Ver info')
+        self.tinfo = Text(width=50, height=10)
+        self.tinfo.pack(side=RIGHT)
+        self.color = StringVar()
+        self.pcolor = StringVar()
 
-        self.tinfo = Text(self.raiz, width=60, height=30)
+        if number == 0x01:
+            self.color = "Rojo"
+            self.on_RadioChange()
 
-        # Sitúa la caja de texto 'self.tinfo' en la parte
-        # superior de la ventana 'self.raiz':
+        elif number == 0x02:
+            self.color = "Amarillo"
+            self.on_RadioChange()
 
-        self.tinfo.pack(side=TOP)
+        elif number == 0x03:
+            self.color = "Verde"
+            self.on_RadioChange()
 
-        # Define el widget Button 'self.binfo' que llamará
-        # al metodo 'self.verinfo' cuando sea presionado
+        elif number == 0x04:
+            self.pcolor = "Peaton Rojo"
+            self.on_RadioChange()
 
-        self.binfo = ttk.Button(self.raiz, text='Info',
-                                command=self.verinfo)
+        elif number == 0x05:
+            self.pcolor = "Peaton Verde"
+            self.on_RadioChange()
 
-        # Coloca el botón 'self.binfo' debajo y a la izquierda
-        # del widget anterior
+        self.canvas = Canvas(window, width=150, height=200, bg="black")
+        self.canvas.pack()
 
-        self.binfo.pack(side=LEFT)
+        self.car_red = self.canvas.create_oval(20, 20, 60, 60, fill="darkred")
+        self.car_yellow = self.canvas.create_oval(20, 70, 60, 110, fill="yellow4")
+        self.car_green = self.canvas.create_oval(20, 120, 60, 160, fill="darkgreen")
 
-        # Define el botón 'self.bsalir'. En este caso
-        # cuando sea presionado, el método destruirá o
-        # terminará la aplicación-ventana 'self.raíz' con
-        # 'self.raiz.destroy'
+        self.pedestrian_red = self.canvas.create_oval(135, 40, 95, 80, fill="darkred")
+        self.pedestrian_green = self.canvas.create_oval(135, 90, 95, 130, fill="darkgreen")
 
-        self.bsalir = ttk.Button(self.raiz, text='Salir',
-                                 command=self.raiz.destroy)
-
-        # Coloca el botón 'self.bsalir' a la derecha del
-        # objeto anterior.
-
-        self.bsalir.pack(side=RIGHT)
-
-        # El foco de la aplicación se sitúa en el botón
-        # 'self.binfo' resaltando su borde. Si se presiona
-        # la barra espaciadora el botón que tiene el foco
-        # será pulsado. El foco puede cambiar de un widget
-        # a otro con la tecla tabulador [tab]
-
-        self.binfo.focus_set()
-        self.raiz.mainloop()
-
-    def verinfo(self):
-        # Borra el contenido que tenga en un momento dado
-        # la caja de texto
-
+        texto_info = "Semaforo no esta conectado"
         self.tinfo.delete("1.0", END)
-
-        # Obtiene información de la ventana 'self.raiz':
-
-        info1 = self.raiz.winfo_class()
-        info2 = self.raiz.winfo_geometry()
-        info3 = str(self.raiz.winfo_width())
-        info4 = str(self.raiz.winfo_height())
-        info5 = str(self.raiz.winfo_rootx())
-        info6 = str(self.raiz.winfo_rooty())
-        info7 = str(self.raiz.winfo_id())
-        info8 = self.raiz.winfo_name()
-        info9 = self.raiz.winfo_manager()
-
-        # Construye una cadena de texto con toda la
-        # información obtenida:
-
-        texto_info = "Clase de 'raiz': " + info1 + "\n"
-        texto_info += "Resolución y posición: " + info2 + "\n"
-        texto_info += "Anchura ventana: " + info3 + "\n"
-        texto_info += "Altura ventana: " + info4 + "\n"
-        texto_info += "Pos. Ventana X: " + info5 + "\n"
-        texto_info += "Pos. Ventana Y: " + info6 + "\n"
-        texto_info += "Id. de 'raiz': " + info7 + "\n"
-        texto_info += "Nombre objeto: " + info8 + "\n"
-        texto_info += "Gestor ventanas: " + info9 + "\n"
-
-        # Inserta la información en la caja de texto:
-
         self.tinfo.insert("1.0", texto_info)
 
+        window.mainloop()
 
-def main():
-    mi_app = Aplicacion()
-    return 0
+    def on_RadioChange(self):
+
+        global start
+        global info
+        now = time()
+        color = self.color
+        pcolor = self.pcolor
+
+        if int(now - start) >= 15 and pcolor == "Peaton Rojo":
+            info = "Aprete en boton para que el semaforo cambie: " + str(int(now - start))
+        else:
+            info = "Tiempo en Verde: " + str(int(now - start))
+
+        if color == "Rojo":
+            self.canvas.itemconfig(self.car_red, fill="red")
+            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+            self.canvas.itemconfig(self.car_green, fill="darkgreen")
+            start = now
+
+        elif color == "Amarillo":
+            self.canvas.itemconfig(self.car_red, fill="darkred")
+            self.canvas.itemconfig(self.car_yellow, fill="yellow")
+            self.canvas.itemconfig(self.car_green, fill="darkgreen")
+
+        elif color == "Verde":
+            self.canvas.itemconfig(self.car_red, fill="darkred")
+            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+            self.canvas.itemconfig(self.car_green, fill="lime")
+
+        if pcolor == "Peaton Rojo":
+            self.canvas.itemconfig(self.pedestrian_red, fill="red")
+            self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
+
+        elif pcolor == "Peaton Verde":
+            self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+            self.canvas.itemconfig(self.pedestrian_green, fill="lime")
+            info = "Peaton en Verde"
+
+        texto_info = "Semaforo Carros: " + color + "\n"
+        texto_info += "Semaforo Peatonal: " + pcolor + "\n"
+        texto_info += info
+
+        self.tinfo.delete("1.0", END)
+        self.tinfo.insert("1.0", texto_info)
+        self.tinfo.after(1000, self.on_RadioChange)
 
 
-if __name__ == '__main__':
-    main()
-
-
-
-
- radio_red = Radiobutton(frame, text="Red", bg="red", variable=self.color, value="Rojo",
-                                command=self.on_RadioChange)
-        radio_red.grid(row=10, column=1)
-
-        radio_yellow = Radiobutton(frame, text="Yellow", bg="yellow", variable=self.color, value="Amarillo",
-                                   command=self.on_RadioChange)
-        radio_yellow.grid(row=10, column=2)
-
-        radio_green = Radiobutton(frame, text="Green", bg="green", variable=self.color, value="Verde",
-                                  command=self.on_RadioChange)
-        radio_green.grid(row=10, column=3)
-
-        radio_green = Radiobutton(frame, text="PR", bg="red", variable=self.pcolor, value="Peaton Rojo",
-                                  command=self.on_RadioChange)
-        radio_green.grid(row=10, column=4)
-
-        radio_green = Radiobutton(frame, text="PG", bg="green", variable=self.pcolor, value="Peaton Verde",
-                                  command=self.on_RadioChange)
-        radio_green.grid(row=10, column=5)
+TrafficLights()
