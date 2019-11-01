@@ -1,29 +1,28 @@
-bus = smbus.SMBus(1)
-address = 0x06
-
-def writeNumber(value):
-    bus.write_i2c_block_data(address, 1, [5,0,1,255, 6]) #dummy array as of now. This can go upto 50 values
-    return -1
-
-
-def readNumber():
-    # number = bus.read_byte(address)
-    data_received_from_Arduino = bus.read_byte(address)
-    for i in data_received_from_Arduino:
-       print(i)
-
-    return number
-
-while i1:
-    writeNumber(1)
-    readNumber()
-
-    #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from tkinter import *
 from tkinter import ttk
 
+import smbus
+import time
+# for RPI version 1, use “bus = smbus.SMBus(0)”
+bus = smbus.SMBus(1)
+
+# This is the address we setup in the Arduino Program
+address = 0x06
+
+def readNumber():
+number = bus.read_byte(address)
+# number = bus.read_byte_data(address, 1)
+return number
+
+while True:
+var = input(“Enter 1 – 9: “)
+if not var:
+continue
+
+number = readNumber()
+print “Arduino: Hey RPI, I received a digit “, number
+
+if number =  0x00
 
 
 class Aplicacion():
@@ -119,3 +118,25 @@ def main():
 if __name__ == '__main__':
     main()
 
+
+
+
+ radio_red = Radiobutton(frame, text="Red", bg="red", variable=self.color, value="Rojo",
+                                command=self.on_RadioChange)
+        radio_red.grid(row=10, column=1)
+
+        radio_yellow = Radiobutton(frame, text="Yellow", bg="yellow", variable=self.color, value="Amarillo",
+                                   command=self.on_RadioChange)
+        radio_yellow.grid(row=10, column=2)
+
+        radio_green = Radiobutton(frame, text="Green", bg="green", variable=self.color, value="Verde",
+                                  command=self.on_RadioChange)
+        radio_green.grid(row=10, column=3)
+
+        radio_green = Radiobutton(frame, text="PR", bg="red", variable=self.pcolor, value="Peaton Rojo",
+                                  command=self.on_RadioChange)
+        radio_green.grid(row=10, column=4)
+
+        radio_green = Radiobutton(frame, text="PG", bg="green", variable=self.pcolor, value="Peaton Verde",
+                                  command=self.on_RadioChange)
+        radio_green.grid(row=10, column=5)
