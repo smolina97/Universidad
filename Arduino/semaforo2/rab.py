@@ -1,11 +1,10 @@
 from tkinter import *
 from time import *
 import smbus
-import time
 
 bus = smbus.SMBus(1)
 address = 0x06
-start = time
+start = time()
 info = " "
 
 
