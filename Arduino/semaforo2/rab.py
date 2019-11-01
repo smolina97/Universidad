@@ -31,24 +31,19 @@ class TrafficLights:
 
         if number == 0x01:
             self.color.set("Rojo")
-            self.on_RadioChange()
 
         elif number == 0x02:
             self.color.set("Amarillo")
-            self.on_RadioChange()
 
         elif number == 0x03:
             self.color.set("Verde")
-            self.on_RadioChange()
 
         elif number == 0x04:
             self.pcolor.set("Peaton Rojo")
-            self.on_RadioChange()
-
+            
         elif number == 0x05:
             self.pcolor.set("Peaton Verde")
-            self.on_RadioChange()
-
+            
         self.canvas = Canvas(window, width=150, height=200, bg="black")
         self.canvas.pack()
 
@@ -64,8 +59,6 @@ class TrafficLights:
         self.tinfo.insert("1.0", texto_info)
 
         window.mainloop()
-
-    def on_RadioChange(self):
 
         global start
         global info
@@ -109,7 +102,6 @@ class TrafficLights:
 
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
-        self.tinfo.after(1000, self.on_RadioChange)
 
 
 TrafficLights()
