@@ -17,7 +17,7 @@ class TrafficLights:
 
     def __init__(self):
 
-        number = bus.read_byte(address)
+        number = readNumber()
         window = Tk()
         window.title("Traffic Lights")
         window.resizable(width=False, height=False)
