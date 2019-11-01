@@ -9,6 +9,11 @@ start = time
 info = " "
 
 
+def readNumber():
+    number = bus.read_byte(address)
+    return number
+
+
 class TrafficLights:
 
     def __init__(self):
