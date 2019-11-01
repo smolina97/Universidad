@@ -8,57 +8,50 @@ start = time()
 info = " "
 
 
-def readNumber():
-    number1 = bus.read_byte(address)
-    print(number1)
-    return number1
-
-
 class TrafficLights:
     def __init__(self):
 
-        while True:
-            number = readNumber()
-            window = Tk()
-            window.title("Traffic Lights")
-            window.resizable(width=False, height=False)
-            frame = Frame(window)
-            frame.pack()
+        number = bus.read_byte(address)
+        window = Tk()
+        window.title("Traffic Lights")
+        window.resizable(width=False, height=False)
+        frame = Frame(window)
+        frame.pack()
 
-            self.tinfo = Text(width=50, height=10)
-            self.tinfo.pack(side=RIGHT)
-            self.color = StringVar()
-            self.pcolor = StringVar()
+        self.tinfo = Text(width=50, height=10)
+        self.tinfo.pack(side=RIGHT)
+        self.color = StringVar()
+        self.pcolor = StringVar()
 
-            if number == 0x01:
-                self.color.set("Rojo")
+        if number == 0x01:
+            self.color.set("Rojo")
 
-            elif number == 0x02:
-                self.color.set("Amarillo")
+        elif number == 0x02:
+            self.color.set("Amarillo")
 
-            elif number == 0x03:
-                self.color.set("Verde")
+        elif number == 0x03:
+            self.color.set("Verde")
 
-            elif number == 0x04:
-                self.pcolor.set("Peaton Rojo")
+        elif number == 0x04:
+            self.pcolor.set("Peaton Rojo")
 
-            elif number == 0x05:
-                self.pcolor.set("Peaton Verde")
+        elif number == 0x05:
+            self.pcolor.set("Peaton Verde")
 
-            self.canvas = Canvas(window, width=150, height=200, bg="black")
-            self.canvas.pack()
+        self.canvas = Canvas(window, width=150, height=200, bg="black")
+        self.canvas.pack()
 
-            self.car_red = self.canvas.create_oval(20, 20, 60, 60, fill="darkred")
-            self.car_yellow = self.canvas.create_oval(20, 70, 60, 110, fill="yellow4")
-            self.car_green = self.canvas.create_oval(20, 120, 60, 160, fill="darkgreen")
+        self.car_red = self.canvas.create_oval(20, 20, 60, 60, fill="darkred")
+        self.car_yellow = self.canvas.create_oval(20, 70, 60, 110, fill="yellow4")
+        self.car_green = self.canvas.create_oval(20, 120, 60, 160, fill="darkgreen")
 
-            self.pedestrian_red = self.canvas.create_oval(135, 40, 95, 80, fill="darkred")
-            self.pedestrian_green = self.canvas.create_oval(135, 90, 95, 130, fill="darkgreen")
+        self.pedestrian_red = self.canvas.create_oval(135, 40, 95, 80, fill="darkred")
+        self.pedestrian_green = self.canvas.create_oval(135, 90, 95, 130, fill="darkgreen")
 
-            texto_info = "Semaforo no esta conectado"
-            self.tinfo.delete("1.0", END)
-            self.tinfo.insert("1.0", texto_info)
-            window.mainloop()
+        texto_info = "Semaforo no esta conectado"
+        self.tinfo.delete("1.0", END)
+        self.tinfo.insert("1.0", texto_info)
+        window.mainloop()
 
     def on_RadioChange(self):
 
