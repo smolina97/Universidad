@@ -7,11 +7,11 @@ address = 0x06
 start = time()
 info = " "
 
-
-class TrafficLights:
+        
+class TrafficLights:   
+    
     def __init__(self):
-
-        number = bus.read_byte(address)
+        
         window = Tk()
         window.title("Traffic Lights")
         window.resizable(width=False, height=False)
@@ -23,21 +23,6 @@ class TrafficLights:
         self.color = StringVar()
         self.pcolor = StringVar()
 
-        if number == 0x01:
-            self.color.set("Rojo")
-
-        elif number == 0x02:
-            self.color.set("Amarillo")
-
-        elif number == 0x03:
-            self.color.set("Verde")
-
-        elif number == 0x04:
-            self.pcolor.set("Peaton Rojo")
-
-        elif number == 0x05:
-            self.pcolor.set("Peaton Verde")
-
         self.canvas = Canvas(window, width=150, height=200, bg="black")
         self.canvas.pack()
 
@@ -48,19 +33,46 @@ class TrafficLights:
         self.pedestrian_red = self.canvas.create_oval(135, 40, 95, 80, fill="darkred")
         self.pedestrian_green = self.canvas.create_oval(135, 90, 95, 130, fill="darkgreen")
 
-        texto_info = "Semaforo no esta conectado"
+        texto_info = self.color.get()
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
+        window.after(100,self.update)
         window.mainloop()
 
-    def on_RadioChange(self):
 
+    def update(self):
+
+        number = bus.read_byte(address)
+
+        peaton = int(number/10)
+        carros = number%10
+        
         global start
         global info
         now = time()
         color = self.color.get()
         pcolor = self.pcolor.get()
+        
 
+        if carros == 1:
+            self.color.set("Rojo")
+
+        elif carros == 2:
+            self.color.set("Amarillo")
+
+        elif carros == 3:
+            self.color.set("Verde")
+
+        if peaton == 1:
+            self.pcolor.set("Peaton Rojo")
+
+        elif peaton == 2:
+            self.pcolor.set("Peaton Verde")
+            
+        elif peaton == 0:
+            self.pcolor.set("Peaton Titilando")    
+            
+        
         if int(now - start) >= 15 and pcolor == "Peaton Rojo":
             info = "Aprete en boton para que el semaforo cambie: " + str(int(now - start))
         else:
@@ -91,13 +103,18 @@ class TrafficLights:
             self.canvas.itemconfig(self.pedestrian_green, fill="lime")
             info = "Peaton en Verde"
 
+        elif pcolor == "Peaton Titilando":
+            self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+            self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
+            info = "Va a cambiar a rojo"
+
         texto_info = "Semaforo Carros: " + color + "\n"
         texto_info += "Semaforo Peatonal: " + pcolor + "\n"
         texto_info += info
 
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
-        self.tinfo.after(1000, self.on_RadioChange)
+        self.tinfo.after(100, self.update)
 
 
 TrafficLights()
