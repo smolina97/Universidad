@@ -15,6 +15,7 @@ long Tactual = 0;
 long Tinicial = 0;
 int cambio = 15000;
 int activo = 0;
+int number;
 
 void setup()
 {
@@ -65,30 +66,32 @@ void loop()
 void controlador()
 {
 
-  if (digitalRead(Verde) == 1)
-  {
-    Wire.write(0x01);
-  }
-
   if (digitalRead(Rojo) == 1)
   {
-    Wire.write(0x02);
+    number = 1;
   }
 
   if (digitalRead(Amarillo) == 1)
   {
-    Wire.write(0x03);
+    number = 2;
+  }
+
+  if (digitalRead(Verde) == 1)
+  {
+    number = 3;
   }
 
   if (digitalRead(PEAR) == 1)
   {
-    Wire.write(0x04);
+    number = 10 + number;
   }
 
   if (digitalRead(PEAV) == 1)
   {
-    Wire.write(0x05);
+    number = 20 + number;
   }
+
+  Wire.write (number);
 }
 
 void sem()
