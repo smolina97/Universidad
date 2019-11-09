@@ -1,3 +1,10 @@
+https://github.com/BehindTheSciences/Raspberry-Pi-Bluetooth-GPIO-Control
+https://www.instructables.com/id/Control-Raspberry-Pi-GPIO-Using-an-App/
+https://www.instructables.com/id/Control-Arduino-using-android-app/#step5
+
+
+
+
 #include <Wire.h>
 
 #define SLAVE_ADDRESS 0x06
