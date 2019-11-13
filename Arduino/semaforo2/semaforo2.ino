@@ -1,6 +1,7 @@
 https://github.com/BehindTheSciences/Raspberry-Pi-Bluetooth-GPIO-Control
 https://www.instructables.com/id/Control-Raspberry-Pi-GPIO-Using-an-App/
 https://www.instructables.com/id/Control-Arduino-using-android-app/#step5
+https://github.com/Mortallica/Universidad/blob/master/Arduino/semaforo2/semaforo2.ino
 
 
 
