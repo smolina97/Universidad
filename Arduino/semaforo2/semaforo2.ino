@@ -1,12 +1,3 @@
-https://github.com/BehindTheSciences/Raspberry-Pi-Bluetooth-GPIO-Control
-https://www.instructables.com/id/Control-Raspberry-Pi-GPIO-Using-an-App/
-https://www.instructables.com/id/Control-Arduino-using-android-app/#step5
-https://github.com/Mortallica/Universidad/blob/master/Arduino/semaforo2/semaforo2.ino
-https://www.raspberrypi.org/forums/viewtopic.php?p=521067#p521067
-
-
-
-
 #include <Wire.h>
 
 #define SLAVE_ADDRESS 0x06
@@ -100,7 +91,7 @@ void controlador()
     number = 20 + number;
   }
 
-  Wire.write (number);
+  Wire.write(number);
 }
 
 void sem()

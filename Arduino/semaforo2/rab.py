@@ -1,17 +1,20 @@
 from tkinter import *
 from time import *
 import smbus
+import RPi.GPIO as GPIO
 
 bus = smbus.SMBus(1)
 address = 0x06
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(11, GPIO.OUT)
 start = time()
 info = " "
 
-        
-class TrafficLights:   
-    
+
+class TrafficLights:
+
     def __init__(self):
-        
+
         window = Tk()
         window.title("Traffic Lights")
         window.resizable(width=False, height=False)
@@ -27,32 +30,36 @@ class TrafficLights:
         self.canvas.pack()
 
         self.car_red = self.canvas.create_oval(20, 20, 60, 60, fill="darkred")
-        self.car_yellow = self.canvas.create_oval(20, 70, 60, 110, fill="yellow4")
-        self.car_green = self.canvas.create_oval(20, 120, 60, 160, fill="darkgreen")
+        self.car_yellow = self.canvas.create_oval(
+            20, 70, 60, 110, fill="yellow4")
+        self.car_green = self.canvas.create_oval(
+            20, 120, 60, 160, fill="darkgreen")
 
-        self.pedestrian_red = self.canvas.create_oval(135, 40, 95, 80, fill="darkred")
-        self.pedestrian_green = self.canvas.create_oval(135, 90, 95, 130, fill="darkgreen")
+        self.pedestrian_red = self.canvas.create_oval(
+            135, 40, 95, 80, fill="darkred")
+        self.pedestrian_green = self.canvas.create_oval(
+            135, 90, 95, 130, fill="darkgreen")
 
         texto_info = self.color.get()
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
-        window.after(100,self.update)
+        window.after(100, self.update)
         window.mainloop()
-
 
     def update(self):
 
         number = bus.read_byte(address)
-
         peaton = int(number/10)
-        carros = number%10
-        
+        carros = number % 10
+
         global start
         global info
         now = time()
         color = self.color.get()
         pcolor = self.pcolor.get()
-        
+
+        if (GPIO.input(1)):
+            info = "SII!!!!!"
 
         if carros == 1:
             self.color.set("Rojo")
@@ -68,15 +75,9 @@ class TrafficLights:
 
         elif peaton == 2:
             self.pcolor.set("Peaton Verde")
-            
+
         elif peaton == 0:
-            self.pcolor.set("Peaton Titilando")    
-            
-        
-        if int(now - start) >= 15 and pcolor == "Peaton Rojo":
-            info = "Aprete en boton para que el semaforo cambie: " + str(int(now - start))
-        else:
-            info = "Tiempo en Verde: " + str(int(now - start))
+            self.pcolor.set("Peaton Titilando")
 
         if color == "Rojo":
             self.canvas.itemconfig(self.car_red, fill="red")
