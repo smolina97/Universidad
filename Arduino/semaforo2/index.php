@@ -1,111 +1,46 @@
 
-http://www.peatonet.com/raspberry-pi-y-los-pines-gpio-controlando-el-led-desde-una-interfaz-web/
-
-
-<html>
- <head>
-                        <!--index.php--> 
- </head>
- <body>
-
-  <!--GPIO17--> 
-  <form action="" method="post">
-   GPIO 17&nbsp;<input type="submit" name="encender17" value="Encender">
-   <input type="submit" name="apagar17" value="Apagar">
-   <input type="submit" name="parpadear17" value="Parpadear">
-
- <br></br>
-
-  <!--GPIO27--> 
-  <form action="" method="post">
-   GPIO 27&nbsp;<input type="submit" name="encender27" value="Encender">
-   <input type="submit" name="apagar27" value="Apagar">
-   <input type="submit" name="parpadear27" value="Parpadear">
-
- <br></br>
-
-  <!--GPIO4--> 
-  <form action="" method="post">
-   GPIO 04&nbsp;<input type="submit" name="encender4" value="Encender">
-   <input type="submit" name="apagar4" value="Apagar">
-   <input type="submit" name="parpadear4" value="Parpadear">
-
- <br></br>
-
-  <!--GPIO22--> 
-  <form action="" method="post">
-   GPIO 22&nbsp;<input type="submit" name="encender22" value="Encender">
-   <input type="submit" name="apagar22" value="Apagar">
-   <input type="submit" name="parpadear22" value="Parpadear">
-
- </body>
-</html>
-
 <?php
+exec("gpio mode 0 out"); // pin 0 in wiring pi is gpio 17
+exec("gpio mode 2 out"); // pin 2 in wiring pi is gpio 27
+exec("gpio mode 3 out"); // pin 3 in wiring pi is gpio 22
+exec("gpio mode 12 out"); // pin 12 in wiring pi is gpio 10
+exec("gpio mode 13 out"); // pin 13 in wiring pi is gpio 9
+exec("gpio mode 14 out"); // pin 14 in wiring pi is gpio 11
+exec("gpio mode 23 out"); // pin 23 in wiring pi is gpio 1
 
-
-
-  if ($_POST[encender17]) { 
-   $a- exec("sudo python3 /var/www/leds/gpio/17/enciende.py");
-   echo $a;
-  }
-
-  if ($_POST[apagar17]) { 
-   $a- exec("sudo python /var/www/leds/gpio/17/apaga.py");
-   echo $a;
-  }
-
-  if ($_POST[parpadear17]) { 
-   $a- exec("sudo python /var/www/leds/gpio/17/parpadea.py");
-   echo $a;
-  }
-
-
-  if ($_POST[encender27]) { 
-   $a- exec("sudo python /var/www/leds/gpio/27/enciende.py");
-   echo $a;
-  }
-
-  if ($_POST[apagar27]) { 
-   $a- exec("sudo python /var/www/leds/gpio/27/apaga.py");
-   echo $a;
-  }
-
-  if ($_POST[parpadear27]) { 
-   $a- exec("sudo python /var/www/leds/gpio/27/parpadea.py");
-   echo $a;
-  }
-
-
-  if ($_POST[encender4]) { 
-   $a- exec("sudo python /var/www/leds/gpio/4/enciende.py");
-   echo $a;
-  }
-
-  if ($_POST[apagar4]) { 
-   $a- exec("sudo python /var/www/leds/gpio/4/apaga.py");
-   echo $a;
-  }
-
-  if ($_POST[parpadear4]) { 
-   $a- exec("sudo python /var/www/leds/gpio/4/parpadea.py");
-   echo $a;
-  }
-
-
-  if ($_POST[encender22]) { 
-   $a- exec("sudo python /var/www/leds/gpio/22/enciende.py");
-   echo $a;
-  }
-
-  if ($_POST[apagar22]) { 
-   $a- exec("sudo python /var/www/leds/gpio/22/apaga.py");
-   echo $a;
-  }
-
-  if ($_POST[parpadear22]) { 
-   $a- exec("sudo python /var/www/leds/ejecgpio/22/parpadea.py");
-   echo $a;
-  }
-
+if (isset($_GET['rojoCarros'])) {
+    if ($_GET['rojoCarros'] == 1) {
+        exec("gpio write 0 1");
+    } else {
+        exec("gpio write 0 0");
+    }
+}
+if (isset($_GET['amarilloCarros'])) {
+    if ($_GET['amarillo'] == 1) {
+        exec("gpio write 2 1");
+    } else {
+        exec("gpio write 2 0");
+    }
+}
+if (isset($_GET['verdeCarros'])) {
+    if ($_GET['verdeCarros'] == 1) {
+        exec("gpio write 3 1");
+    } else {
+        exec("gpio write 3 0");
+    }
+}
+if (isset($_GET['rojoPeaton'])) {
+    if ($_GET['rojoPeaton'] == 1) {
+        exec("gpio write 12 1");
+    } else {
+        exec("gpio write 12 0");
+    }
+}
+if (isset($_GET['verdePeaton'])) {
+    if ($_GET['verdePeaton'] == 1) {
+        exec("gpio write 13 1");
+    } else {
+        exec("gpio write 13 0");
+    }
+}
 ?>

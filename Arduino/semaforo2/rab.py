@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 bus = smbus.SMBus(1)
 address = 0x06
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(11, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
 start = time()
 info = " "
 
@@ -58,8 +58,8 @@ class TrafficLights:
         color = self.color.get()
         pcolor = self.pcolor.get()
 
-        if (GPIO.input(1)):
-            info = "SII!!!!!"
+        if (GPIO.input(17)):
+             bus.write_byte(address, 1)
 
         if carros == 1:
             self.color.set("Rojo")

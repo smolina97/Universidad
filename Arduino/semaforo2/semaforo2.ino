@@ -7,6 +7,7 @@
 #define PEAR 31
 #define PEAV 32
 #define boton 37
+#define stop 36
 
 int estado = 0;
 int tiempo = 0;
@@ -15,6 +16,7 @@ long Tactual = 0;
 long Tinicial = 0;
 int cambio = 15000;
 int activo = 0;
+int recive;
 int number;
 
 void setup()
@@ -22,6 +24,7 @@ void setup()
 
   Wire.begin(SLAVE_ADDRESS);
   Wire.onRequest(controlador);
+  Wire.onReceive(modoControl);
 
   pinMode(Rojo, OUTPUT);
   pinMode(Amarillo, OUTPUT);
@@ -50,6 +53,11 @@ void loop()
   digitalWrite(PEAV, 0);
   delay(500);
 
+  if (digitalRead(stop))
+  {
+    modoControl();
+  }
+
   if (digitalRead(boton) == 1)
   {
     activo = 1;
@@ -61,6 +69,23 @@ void loop()
     sem();
   }
   controlador();
+}
+
+void modoControl(int byteCount)
+{
+  while (Wire.available())
+  {
+    recive = Wire.read();
+  }
+
+  while (recive == 1)
+  {
+    digitalWrite(Rojo, 0);
+    digitalWrite(Amarillo, 0);
+    digitalWrite(Verde, 0);
+    digitalWrite(PEAR, 0);
+    digitalWrite(PEAV, 0);
+  }
 }
 
 void controlador()
@@ -101,6 +126,7 @@ void sem()
   {
     while (tiempo < 3)
     {
+      modoControl();
       controlador();
       delay(600);
       digitalWrite(Rojo, 0);
@@ -115,6 +141,7 @@ void sem()
     tiempo = 0;
     while (tiempo < 3)
     {
+      modoControl();
       controlador();
       delay(500);
       digitalWrite(Rojo, 0);
@@ -129,6 +156,7 @@ void sem()
     tiempo = 0;
     while (tiempo < 2)
     {
+      modoControl();
       controlador();
       digitalWrite(Rojo, 1);
       digitalWrite(Amarillo, 0);
@@ -142,6 +170,7 @@ void sem()
     tiempo = 0;
     while (tiempo < 3)
     {
+      modoControl();
       controlador();
       delay(500);
       digitalWrite(Rojo, 1);
@@ -156,6 +185,7 @@ void sem()
     tiempo = 0;
     while (tiempo2 < 3)
     {
+      modoControl();
       controlador();
       delay(500);
       digitalWrite(PEAV, 1);
@@ -165,6 +195,7 @@ void sem()
       tiempo2++;
     }
 
+    modoControl();
     controlador();
     digitalWrite(Rojo, 1);
     digitalWrite(PEAR, 1);
