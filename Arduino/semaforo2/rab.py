@@ -5,8 +5,16 @@ import RPi.GPIO as GPIO
 
 bus = smbus.SMBus(1)
 address = 0x06
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(11, GPIO.OUT)
+
+modoControl = 11
+modRojoCarros = 17
+modAmarilloCarros = 27
+modVerdeCarros = 22
+modRojoPeaton = 10
+modVerdePeaton = 9
+
 start = time()
 info = " "
 
@@ -14,6 +22,13 @@ info = " "
 class TrafficLights:
 
     def __init__(self):
+
+        GPIO.setup(modoControl, GPIO.OUT)
+        GPIO.setup(modRojoCarros, GPIO.OUT)
+        GPIO.setup(modAmarilloCarros, GPIO.OUT)
+        GPIO.setup(modVerdeCarros, GPIO.OUT)
+        GPIO.setup(modRojoPeaton, GPIO.OUT)
+        GPIO.setup(modVerdePeaton, GPIO.OUT)
 
         window = Tk()
         window.title("Traffic Lights")
@@ -48,9 +63,13 @@ class TrafficLights:
 
     def update(self):
 
-        number = bus.read_byte(address)
-        peaton = int(number/10)
-        carros = number % 10
+        datos = bus.read_i2c_block_data(address, 0, 5)
+
+        rojoCarros = datos[0]
+        amarilloCarros = datos[1]
+        verdeCarros = datos[2]
+        rojoPeaton = datos[3]
+        verdePeaton = datos[4]
 
         global start
         global info
@@ -58,56 +77,68 @@ class TrafficLights:
         color = self.color.get()
         pcolor = self.pcolor.get()
 
-        if (GPIO.input(1)):
-            info = "SII!!!!!"
+        if (GPIO.input(modRojoCarros)) == 1:
+            bus.write_byte(address, 0)
+        else:
+            bus.write_byte(address, 1)
 
-        if carros == 1:
-            self.color.set("Rojo")
+        if (GPIO.input(modAmarilloCarros)) == 1:
+            bus.write_byte(address, 2)
+        else:
+            bus.write_byte(address, 3)
 
-        elif carros == 2:
-            self.color.set("Amarillo")
+        if (GPIO.input(modVerdeCarros)) == 1:
+            bus.write_byte(address, 4)
+        else:
+            bus.write_byte(address, 5)
 
-        elif carros == 3:
-            self.color.set("Verde")
+        if (GPIO.input(modRojoPeaton)) == 1:
+            bus.write_byte(address, 6)
+        else:
+            bus.write_byte(address, 7)
 
-        if peaton == 1:
-            self.pcolor.set("Peaton Rojo")
+        if (GPIO.input(modVerdePeaton)) == 1:
+            bus.write_byte(address, 8)
+        else:
+            bus.write_byte(address, 9)
 
-        elif peaton == 2:
-            self.pcolor.set("Peaton Verde")
+        if (GPIO.input(modoControl)) == 1:
+            bus.write_byte(address, 10)
+        else: 
+            bus.write_byte(address, 11)
 
-        elif peaton == 0:
-            self.pcolor.set("Peaton Titilando")
-
-        if color == "Rojo":
+        if rojoCarros == 0:
             self.canvas.itemconfig(self.car_red, fill="red")
-            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
-            self.canvas.itemconfig(self.car_green, fill="darkgreen")
-            start = now
-
-        elif color == "Amarillo":
+            color = "Rojo"
+        else:
             self.canvas.itemconfig(self.car_red, fill="darkred")
+
+        if amarilloCarros == 2:
             self.canvas.itemconfig(self.car_yellow, fill="yellow")
+            color = "Amarillo"
+        else:
+            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+
+        if verdeCarros == 4:
+            self.canvas.itemconfig(self.car_green, fill="lime")
+            color = "Verde"
+
+        else:
             self.canvas.itemconfig(self.car_green, fill="darkgreen")
 
-        elif color == "Verde":
-            self.canvas.itemconfig(self.car_red, fill="darkred")
-            self.canvas.itemconfig(self.car_yellow, fill="yellow4")
-            self.canvas.itemconfig(self.car_green, fill="lime")
-
-        if pcolor == "Peaton Rojo":
+        if rojoPeaton == 6:
             self.canvas.itemconfig(self.pedestrian_red, fill="red")
-            self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
+            pcolor = "Rojo"
 
-        elif pcolor == "Peaton Verde":
+        else:
             self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+
+        if verdePeaton == 8:
             self.canvas.itemconfig(self.pedestrian_green, fill="lime")
-            info = "Peaton en Verde"
+            pcolor = "Verde"
 
-        elif pcolor == "Peaton Titilando":
-            self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+        else:
             self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
-            info = "Va a cambiar a rojo"
 
         texto_info = "Semaforo Carros: " + color + "\n"
         texto_info += "Semaforo Peatonal: " + pcolor + "\n"
