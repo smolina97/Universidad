@@ -86,47 +86,47 @@ void controlador()
 
   if (digitalRead(Rojo) == 1)
   {
-    carroRojo = 0;
+    carroRojo = 1;
   }
   else
   {
-    carroRojo = 1;
+    carroRojo = 0;
   }
 
   if (digitalRead(Amarillo) == 1)
   {
-    carroAmarillo = 2;
+    carroAmarillo = 1;
   }
   else
   {
-    carroAmarillo = 3;
+    carroAmarillo = 0;
   }
 
   if (digitalRead(Verde) == 1)
   {
-    carroVerde = 4;
+    carroVerde = 1;
   }
   else
   {
-    carroVerde = 5;
+    carroVerde = 0;
   }
 
   if (digitalRead(PEAR) == 1)
   {
-    peatonRojo = 6;
+    peatonRojo = 1;
   }
   else
   {
-    peatonRojo = 7;
+    peatonRojo = 0;
   }
 
   if (digitalRead(PEAV) == 1)
   {
-    peatonVerde = 8;
+    peatonVerde = 1;
   }
   else
   {
-    peatonVerde = 9;
+    peatonVerde = 0;
   }
 
   Wire.write(carroRojo);

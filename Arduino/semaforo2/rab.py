@@ -78,62 +78,70 @@ class TrafficLights:
         pcolor = self.pcolor.get()
 
         if (GPIO.input(modRojoCarros)) == 1:
-            bus.write_byte(address, 0)
+            rojC = 1
         else:
-            bus.write_byte(address, 1)
+            rojC = 0
 
         if (GPIO.input(modAmarilloCarros)) == 1:
-            bus.write_byte(address, 2)
+            amaC = 1
         else:
-            bus.write_byte(address, 3)
+            amaC = 0
 
         if (GPIO.input(modVerdeCarros)) == 1:
-            bus.write_byte(address, 4)
+            verC = 1
         else:
-            bus.write_byte(address, 5)
+            verC = 0
 
         if (GPIO.input(modRojoPeaton)) == 1:
-            bus.write_byte(address, 6)
+            rojP = 1
         else:
-            bus.write_byte(address, 7)
+            rojP = 0
 
         if (GPIO.input(modVerdePeaton)) == 1:
-            bus.write_byte(address, 8)
+            verP = 1
         else:
-            bus.write_byte(address, 9)
+            verP = 0
 
         if (GPIO.input(modoControl)) == 1:
-            bus.write_byte(address, 10)
-        else: 
-            bus.write_byte(address, 11)
+            conM = 1
+        else:
+            comM = 0
 
-        if rojoCarros == 0:
+
+        bus.write_byte(address, rojC)
+        bus.write_byte(address, amaC)
+        bus.write_byte(address, verC)
+        bus.write_byte(address, rojP)
+        bus.write_byte(address, verP)
+        bus.write_byte(address, comM)
+
+        if rojoCarros == 1:
             self.canvas.itemconfig(self.car_red, fill="red")
             color = "Rojo"
         else:
             self.canvas.itemconfig(self.car_red, fill="darkred")
 
-        if amarilloCarros == 2:
+        if amarilloCarros == 1:
             self.canvas.itemconfig(self.car_yellow, fill="yellow")
             color = "Amarillo"
         else:
             self.canvas.itemconfig(self.car_yellow, fill="yellow4")
 
-        if verdeCarros == 4:
+        if verdeCarros == 1:
             self.canvas.itemconfig(self.car_green, fill="lime")
             color = "Verde"
 
         else:
             self.canvas.itemconfig(self.car_green, fill="darkgreen")
 
-        if rojoPeaton == 6:
+        if rojoPeaton == 1:
             self.canvas.itemconfig(self.pedestrian_red, fill="red")
             pcolor = "Rojo"
 
         else:
             self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
 
-        if verdePeaton == 8:
+        if verdePeaton == 1:
             self.canvas.itemconfig(self.pedestrian_green, fill="lime")
             pcolor = "Verde"
 
