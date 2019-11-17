@@ -16,15 +16,19 @@ long Tactual = 0;
 long Tinicial = 0;
 int cambio = 15000;
 int activo = 0;
-int recive;
-int number;
+int recive[6];
+int carroRojo;
+int carroAmarillo;
+int carroVerde;
+int peatonRojo;
+int peatonVerde;
 
 void setup()
 {
 
   Wire.begin(SLAVE_ADDRESS);
   Wire.onRequest(controlador);
-  Wire.onReceive(modoControl);
+  Wire.onReceive(Control);
 
   pinMode(Rojo, OUTPUT);
   pinMode(Amarillo, OUTPUT);
@@ -53,11 +57,6 @@ void loop()
   digitalWrite(PEAV, 0);
   delay(500);
 
-  if (digitalRead(stop))
-  {
-    modoControl();
-  }
-
   if (digitalRead(boton) == 1)
   {
     activo = 1;
@@ -71,21 +70,15 @@ void loop()
   controlador();
 }
 
-void modoControl(int byteCount)
+void Control(int byteCount)
 {
-  while (Wire.available())
+  for (int i = 0; i < byteCount; i++)
   {
-    recive = Wire.read();
+    recive[i] = Wire.read();
   }
 
-  while (recive == 1)
-  {
-    digitalWrite(Rojo, 0);
-    digitalWrite(Amarillo, 0);
-    digitalWrite(Verde, 0);
-    digitalWrite(PEAR, 0);
-    digitalWrite(PEAV, 0);
-  }
+    Serial.print(recive[0]);
+
 }
 
 void controlador()
@@ -93,30 +86,54 @@ void controlador()
 
   if (digitalRead(Rojo) == 1)
   {
-    number = 1;
+    carroRojo = 0;
+  }
+  else
+  {
+    carroRojo = 1;
   }
 
   if (digitalRead(Amarillo) == 1)
   {
-    number = 2;
+    carroAmarillo = 2;
+  }
+  else
+  {
+    carroAmarillo = 3;
   }
 
   if (digitalRead(Verde) == 1)
   {
-    number = 3;
+    carroVerde = 4;
+  }
+  else
+  {
+    carroVerde = 5;
   }
 
   if (digitalRead(PEAR) == 1)
   {
-    number = 10 + number;
+    peatonRojo = 6;
+  }
+  else
+  {
+    peatonRojo = 7;
   }
 
   if (digitalRead(PEAV) == 1)
   {
-    number = 20 + number;
+    peatonVerde = 8;
+  }
+  else
+  {
+    peatonVerde = 9;
   }
 
-  Wire.write(number);
+  Wire.write(carroRojo);
+  Wire.write(carroAmarillo);
+  Wire.write(carroVerde);
+  Wire.write(peatonRojo);
+  Wire.write(peatonVerde);
 }
 
 void sem()
@@ -126,7 +143,6 @@ void sem()
   {
     while (tiempo < 3)
     {
-      modoControl();
       controlador();
       delay(600);
       digitalWrite(Rojo, 0);
@@ -141,7 +157,6 @@ void sem()
     tiempo = 0;
     while (tiempo < 3)
     {
-      modoControl();
       controlador();
       delay(500);
       digitalWrite(Rojo, 0);
@@ -156,7 +171,7 @@ void sem()
     tiempo = 0;
     while (tiempo < 2)
     {
-      modoControl();
+
       controlador();
       digitalWrite(Rojo, 1);
       digitalWrite(Amarillo, 0);
@@ -170,7 +185,7 @@ void sem()
     tiempo = 0;
     while (tiempo < 3)
     {
-      modoControl();
+
       controlador();
       delay(500);
       digitalWrite(Rojo, 1);
@@ -185,7 +200,7 @@ void sem()
     tiempo = 0;
     while (tiempo2 < 3)
     {
-      modoControl();
+
       controlador();
       delay(500);
       digitalWrite(PEAV, 1);
@@ -195,7 +210,6 @@ void sem()
       tiempo2++;
     }
 
-    modoControl();
     controlador();
     digitalWrite(Rojo, 1);
     digitalWrite(PEAR, 1);

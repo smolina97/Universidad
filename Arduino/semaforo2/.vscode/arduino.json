@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:mega",
     "configuration": "cpu=atmega2560",
-    "programmer": "AVRISP mkII",
+    "programmer": "AVR ISP",
     "port": "/dev/ttyACM0",
     "sketch": "semaforo2.ino"
 }
