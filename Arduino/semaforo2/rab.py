@@ -64,6 +64,7 @@ class TrafficLights:
     def update(self):
 
         datos = bus.read_i2c_block_data(address, 0, 5)
+        datosEnviar = []
 
         rojoCarros = datos[0]
         amarilloCarros = datos[1]
@@ -78,42 +79,41 @@ class TrafficLights:
         pcolor = self.pcolor.get()
 
         if (GPIO.input(modRojoCarros)) == 1:
-            rojC = 1
+            datosEnviar[0] = 1
         else:
-            rojC = 0
+            datosEnviar[0] = 0
 
         if (GPIO.input(modAmarilloCarros)) == 1:
-            amaC = 1
+            datosEnviar[1] = 1
+
         else:
-            amaC = 0
+            datosEnviar[1] = 0
 
         if (GPIO.input(modVerdeCarros)) == 1:
-            verC = 1
+            datosEnviar[2] = 1
+
         else:
-            verC = 0
+            datosEnviar[2] = 0
 
         if (GPIO.input(modRojoPeaton)) == 1:
-            rojP = 1
+            datosEnviar[3] = 1
+
         else:
-            rojP = 0
+            datosEnviar[3] = 0
 
         if (GPIO.input(modVerdePeaton)) == 1:
-            verP = 1
+            datosEnviar[4] = 1
+
         else:
-            verP = 0
+            datosEnviar[4] = 0
 
         if (GPIO.input(modoControl)) == 1:
-            conM = 1
+            datosEnviar[5] = 1
+
         else:
-            comM = 0
+            datosEnviar[5] = 0
 
-
-        bus.write_byte(address, rojC)
-        bus.write_byte(address, amaC)
-        bus.write_byte(address, verC)
-        bus.write_byte(address, rojP)
-        bus.write_byte(address, verP)
-        bus.write_byte(address, comM)
+        bus.write_i2c_block_data(address, 0, datosEnviar)
 
         if rojoCarros == 1:
             self.canvas.itemconfig(self.car_red, fill="red")
