@@ -17,6 +17,7 @@ long Tinicial = 0;
 int cambio = 15000;
 int activo = 0;
 int recive[6];
+int botonEn;
 int carroRojo;
 int carroAmarillo;
 int carroVerde;
@@ -65,6 +66,11 @@ void loop()
   if (digitalRead(boton) == 1)
   {
     activo = 1;
+
+  }
+  else
+  {
+    botonEn = 0;
   }
 
   if (activo == 1)
@@ -193,6 +199,7 @@ void controlador()
   Wire.write(carroVerde);
   Wire.write(peatonRojo);
   Wire.write(peatonVerde);
+
 }
 
 void sem()

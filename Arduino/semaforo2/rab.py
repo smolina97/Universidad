@@ -68,13 +68,13 @@ class TrafficLights:
     def update(self):
 
         datos = bus.read_i2c_block_data(address, 0, 6)
-        datosEnviar = [0, 0, 0, 0, 0, 0, 0]
+        datosEnviar = [0, 0, 0, 0, 0, 0]
         rojoCarros = datos[0]
         amarilloCarros = datos[1]
         verdeCarros = datos[2]
         rojoPeaton = datos[3]
         verdePeaton = datos[4]
-        new_boton = datos[5]
+        
 
         global start
         global info
@@ -113,9 +113,11 @@ class TrafficLights:
 
         if (GPIO.input(modoControl)) == 1:
             datosEnviar[5] = 1
+            new_boton = 1
 
         else:
             datosEnviar[5] = 0
+            new_boton = 0
 
         
         if rojoCarros == 1:
