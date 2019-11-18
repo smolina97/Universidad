@@ -57,16 +57,21 @@ void loop()
   digitalWrite(PEAV, 0);
   delay(500);
 
+  while (recive[6] == 1)
+  {
+    mantenimiento();
+  }
+
   if (digitalRead(boton) == 1)
   {
     activo = 1;
-    Wire.write(0x00);
   }
 
   if (activo == 1)
   {
     sem();
   }
+
   controlador();
 }
 
@@ -76,9 +81,63 @@ void Control(int byteCount)
   {
     recive[i] = Wire.read();
   }
+}
 
-    Serial.print(recive[0]);
+void mantenimiento()
+{
+  while (recive[1] != 1 && recive[2] != 1 && recive[3] != 1 && recive[4] != 1 && recive[5] != 1)
+  {
+    digitalWrite(Rojo, 0);
+    digitalWrite(Amarillo, 0);
+    digitalWrite(Verde, 0);
+    digitalWrite(PEAR, 0);
+    digitalWrite(PEAV, 0);
+  }
 
+  if (recive[1] == 1)
+  {
+    digitalWrite(Rojo, 1);
+  }
+  else
+  {
+    digitalWrite(Rojo, 0);
+  }
+
+  if (recive[2] == 1)
+  {
+    digitalWrite(Amarillo, 1);
+  }
+  else
+  {
+    digitalWrite(Amarillo, 0);
+  }
+
+  if (recive[3] == 1)
+  {
+    digitalWrite(Verde, 1);
+  }
+  else
+  {
+    digitalWrite(Verde, 0);
+  }
+
+  if (recive[4] == 1)
+  {
+    digitalWrite(PEAR, 1);
+  }
+  else
+  {
+    digitalWrite(PEAR, 0);
+  }
+
+  if (recive[5] == 1)
+  {
+    digitalWrite(PEAV, 1);
+  }
+  else
+  {
+    digitalWrite(PEAV, 0);
+  }
 }
 
 void controlador()
