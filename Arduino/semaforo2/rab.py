@@ -19,19 +19,6 @@ modVerdePeaton = 9
 
 api = ApiClient(token='BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z')
 
-CARROS_ROJO = api.get_variable('5dd297b48683d522e9f2c5b0')
-new_carros_rojo = 0
-CARROS_AMARILLO = api.get_variable("5dd2940a1d847225901ba46e")
-new_carros_amarillo = 0
-CARROS_VERDE = api.get_variable("5dd293fd1d8472286057c797")
-new_carros_verde = 0
-PEATON_ROJO = api.get_variable("5dd293e31d8472288eb77ae0")
-new_peaton_rojo = 0
-PEATON_VERDE = api.get_variable("5dd293db1d8472277fec0167")
-new_peaton_verde = 0
-BOTON_EN = api.get_variable("5dd297bd8683d52369ce2c99")
-new_boton = 0
-
 start = time()
 info = " "
 
@@ -88,19 +75,7 @@ class TrafficLights:
         verdeCarros = datos[2]
         rojoPeaton = datos[3]
         verdePeaton = datos[4]
-
-        rojo_Carros = datos[0]
-        amarillo_Carros = datos[1]
-        verde_Carros = datos[2]
-        rojo_Peaton = datos[3]
-        verde_Peaton = datos[4]
         boton_En = datos[5]
-        
-        global new_carros_rojo
-        global new_carros_amarillo
-        global new_carros_verde
-        global new_peaton_rojo
-        global new_peaton_verde
 
         global start
         global info
@@ -191,9 +166,7 @@ class TrafficLights:
             self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
             new_peaton_verde = 0
 
-
-        bus.i2c_write_block_data(address,6,datosEnviar)
-
+        bus.write_i2c_block_data(address, 0, datosEnviar)
         api.save_collection([{'variable': '5dd297b48683d522e9f2c5b0', 'value': new_carros_rojo}, {'variable': '5dd2940a1d847225901ba46e', 'value':new_carros_amarillo},
                              {'variable': '5dd293fd1d8472286057c797', 'value':new_carros_verde}, {'variable': '5dd293e31d8472288eb77ae0', 'value':new_peaton_rojo},
                              {'variable': '5dd293db1d8472277fec0167', 'value':new_peaton_verde}, {'variable': '5dd297bd8683d52369ce2c99', 'value':new_boton}])
