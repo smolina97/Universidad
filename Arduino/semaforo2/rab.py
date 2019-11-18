@@ -1,7 +1,15 @@
 from tkinter import *
 from time import *
+import requests
 import smbus
 import RPi.GPIO as GPIO
+
+
+TOKEN = "5dd293a41d847227ac67f43a"
+DEVICE_LABEL = "semaforo"
+CARROS_ROJO = "carros-rojo"
+CARROS_AMARILLO = "carros-amarillo"
+CARROS_VERDE = "carros-verde"
 
 bus = smbus.SMBus(1)
 address = 0x06
@@ -14,6 +22,7 @@ modAmarilloCarros = 27
 modVerdeCarros = 22
 modRojoPeaton = 10
 modVerdePeaton = 9
+payload = {}
 
 start = time()
 info = " "
@@ -59,6 +68,7 @@ class TrafficLights:
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
         window.after(100, self.update)
+        window.after(100, post_request(payload))
         window.mainloop()
 
     def update(self):
@@ -71,6 +81,12 @@ class TrafficLights:
         verdeCarros = datos[2]
         rojoPeaton = datos[3]
         verdePeaton = datos[4]
+
+        rojo_Carros = datos[0]
+        amarillo_Carros = datos[1]
+        verde_Carros = datos[2]
+        rojo_Peaton = datos[3]
+        verde_Peaton = datos[4]
 
         global start
         global info
@@ -113,6 +129,8 @@ class TrafficLights:
         else:
             datosEnviar[5] = 0
 
+        payload = {CARROS_ROJO: rojo_Carros,
+                   CARROS_AMARILLO: amarillo_Carros, CARROS_VERDE: verde_Carros}
         bus.write_i2c_block_data(address, 0, datosEnviar)
 
         if rojoCarros == 1:
@@ -155,6 +173,31 @@ class TrafficLights:
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
         self.tinfo.after(100, self.update)
+
+
+def post_request(payload):
+        # Creates the headers for the HTTP requests
+    url = "http://industrial.api.ubidots.com"
+    url = "{}/api/v1.6/devices/{}".format(url, DEVICE_LABEL)
+    headers = {"X-Auth-Token": TOKEN, "Content-Type": "application/json"}
+
+    # Makes the HTTP requests
+    status = 400
+    attempts = 0
+    while status >= 400 and attempts <= 5:
+        req = requests.post(url=url, headers=headers, json=payload)
+        status = req.status_code
+        attempts += 1
+        sleep(1)
+
+    # Processes results
+    if status >= 400:
+        print("[ERROR] Could not send data after 5 attempts, please check \
+            your token credentials and internet connection")
+        return False
+
+    print("[INFO] request made properly, your device is updated")
+    return True
 
 
 TrafficLights()
