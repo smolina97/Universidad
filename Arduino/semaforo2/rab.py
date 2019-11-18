@@ -175,3 +175,4 @@ class TrafficLights:
         self.tinfo.after(10, self.update)     
 
 TrafficLights()
+
