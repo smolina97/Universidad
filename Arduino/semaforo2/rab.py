@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 
 
 TOKEN = "5dd293a41d847227ac67f43a"
-DEVICE_LABEL = "semaforo"
+DEVICE_LABEL = "5dd297b48683d522e9f2c5b0"
 CARROS_ROJO = "carros-rojo"
 CARROS_AMARILLO = "carros-amarillo"
 CARROS_VERDE = "carros-verde"
