@@ -9,8 +9,6 @@ bus = smbus.SMBus(1)
 address = 0x06
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-api = ApiClient(token='BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z')
-MODO_CONTROLADOR = api.get_variable("5dd297cc8683d5247121dd13")
 
 modoControl = 11
 modRojoCarros = 17
@@ -18,7 +16,14 @@ modAmarilloCarros = 27
 modVerdeCarros = 22
 modRojoPeaton = 10
 modVerdePeaton = 9
-Datos_Eviados = 0
+
+api = ApiClient(token='BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z')
+
+CARROS_ROJO = api.get_variable('5dd297b48683d522e9f2c5b0')
+CARROS_AMARILLO = api.get_variable("5dd2940a1d847225901ba46e")
+CARROS_VERDE = api.get_variable("5dd293fd1d8472286057c797")
+PEATON_ROJO = api.get_variable("5dd293e31d8472288eb77ae0")
+PEATON_VERDE = api.get_variable("5dd293db1d8472277fec0167")
 
 start = time()
 info = " "
@@ -34,7 +39,6 @@ class TrafficLights:
         GPIO.setup(modVerdeCarros, GPIO.OUT)
         GPIO.setup(modRojoPeaton, GPIO.OUT)
         GPIO.setup(modVerdePeaton, GPIO.OUT)
-
 
         window = Tk()
         window.title("Traffic Lights")
@@ -65,7 +69,16 @@ class TrafficLights:
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
         window.after(100, self.update)
+        window.after(100, self.conexion)
+
         window.mainloop()
+
+    def conexion(self):
+        CARROS_ROJO.save_value({'value': 1})
+        CARROS_AMARILLO.save_value({'value': 1})
+        CARROS_VERDE.save_value({'value': 1})
+        PEATON_ROJO.save_value({'value': 1})
+        PEATON_VERDE.save_value({'value': 1})
 
     def update(self):
 
@@ -127,53 +140,39 @@ class TrafficLights:
 
         bus.write_i2c_block_data(address, 0, datosEnviar)
 
+
         if rojoCarros == 1:
             self.canvas.itemconfig(self.car_red, fill="red")
             color = "Rojo"
-            Datos_Eviados = 1
-
         else:
             self.canvas.itemconfig(self.car_red, fill="darkred")
-            Datos_Eviados = 2
 
         if amarilloCarros == 1:
             self.canvas.itemconfig(self.car_yellow, fill="yellow")
             color = "Amarillo"
-            Datos_Eviados = 10 + Datos_Eviados
         else:
             self.canvas.itemconfig(self.car_yellow, fill="yellow4")
-            Datos_Eviados = 20 + Datos_Eviados
 
         if verdeCarros == 1:
             self.canvas.itemconfig(self.car_green, fill="lime")
             color = "Verde"
-            Datos_Eviados = 100 + Datos_Eviados
-
         else:
             self.canvas.itemconfig(self.car_green, fill="darkgreen")
-            Datos_Eviados = 200 + Datos_Eviados
 
         if rojoPeaton == 1:
             self.canvas.itemconfig(self.pedestrian_red, fill="red")
             pcolor = "Rojo"
-            Datos_Eviados = 1000 + Datos_Eviados
 
         else:
             self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
-            Datos_Eviados = 2000 + Datos_Eviados
-
 
         if verdePeaton == 1:
             self.canvas.itemconfig(self.pedestrian_green, fill="lime")
             pcolor = "Verde"
-            Datos_Eviados = 10000 + Datos_Eviados
-
 
         else:
             self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
-            Datos_Eviados = 20000 + Datos_Eviados
 
-        MODO_CONTROLADOR.save_value({'value':Datos_Eviados})
         texto_info = "Semaforo Carros: " + color + "\n"
         texto_info += "Semaforo Peatonal: " + pcolor + "\n"
         texto_info += info
