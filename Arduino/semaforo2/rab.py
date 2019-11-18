@@ -18,6 +18,7 @@ modRojoPeaton = 10
 modVerdePeaton = 9
 
 api = ApiClient(token='BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z')
+boton = api.get_variable('5dd297bd8683d52369ce2c99')
 
 start = time()
 info = " "
@@ -68,8 +69,8 @@ class TrafficLights:
     def update(self):
 
         datos = bus.read_i2c_block_data(address, 0, 6)
-        datosEnviar = [0, 0, 0, 0, 0, 0]
-
+        datosEnviar = [0, 0, 0, 0, 0, 0, 0]
+        datosEnviar[6] = bo_.get_values(1)
         rojoCarros = datos[0]
         amarilloCarros = datos[1]
         verdeCarros = datos[2]
