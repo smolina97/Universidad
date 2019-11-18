@@ -1,19 +1,15 @@
 from tkinter import *
 from time import *
-import requests
+from ubidots import ApiClient
+
 import smbus
 import RPi.GPIO as GPIO
 
 
 TOKEN = "BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z"
 
-CARROS_ROJO = "5dd297b48683d522e9f2c5b0"
-CARROS_AMARILLO = "5dd2940a1d847225901ba46e"
-CARROS_VERDE = "5dd293fd1d8472286057c797"
-PEATON_ROJO = "5dd293e31d8472288eb77ae0"
-PEATON_VERDE= "5dd293db1d8472277fec0167"
-BOTON = "5dd297bd8683d52369ce2c99"
-MODO_CONTROLADOR = "5dd297cc8683d5247121dd13"
+= "5dd297b48683d522e9f2c5b0"
+
 
 bus = smbus.SMBus(1)
 address = 0x06
@@ -42,6 +38,15 @@ class TrafficLights:
         GPIO.setup(modVerdeCarros, GPIO.OUT)
         GPIO.setup(modRojoPeaton, GPIO.OUT)
         GPIO.setup(modVerdePeaton, GPIO.OUT)
+
+        api = ApiClient(token='BBFF-QqEBRqhTmEsSj6STt6bOgJoKelwO4z')
+        CARROS_ROJO = api.get_variable('5dd297b48683d522e9f2c5b0')
+        CARROS_AMARILLO = api.get_variable("5dd2940a1d847225901ba46e")
+        CARROS_VERDE = api.get_variable("5dd293fd1d8472286057c797")
+        PEATON_ROJO = api.get_variable("5dd293e31d8472288eb77ae0")
+        PEATON_VERDE = api.get_variable("5dd293db1d8472277fec0167")
+        BOTON = api.get_variable("5dd297bd8683d52369ce2c99")
+        MODO_CONTROLADOR = api.get_variable("5dd297cc8683d5247121dd13")
 
         window = Tk()
         window.title("Traffic Lights")
@@ -72,13 +77,14 @@ class TrafficLights:
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
         window.after(100, self.update)
-        window.after(100, post_request(payload))
         window.mainloop()
 
     def update(self):
 
+        
+
         datos = bus.read_i2c_block_data(address, 0, 5)
-        datosEnviar = []
+        datosEnviar = [0,0,0,0,0,0]
 
         rojoCarros = datos[0]
         amarilloCarros = datos[1]
@@ -133,42 +139,49 @@ class TrafficLights:
         else:
             datosEnviar[5] = 0
 
-        payload = {CARROS_ROJO: rojo_Carros,
-                   CARROS_AMARILLO: amarillo_Carros, CARROS_VERDE: verde_Carros}
         bus.write_i2c_block_data(address, 0, datosEnviar)
 
         if rojoCarros == 1:
             self.canvas.itemconfig(self.car_red, fill="red")
             color = "Rojo"
+            CARROS_ROJO.save_value({'value': 1})
         else:
             self.canvas.itemconfig(self.car_red, fill="darkred")
+            CARROS_ROJO.save_value({'value': 0})
 
         if amarilloCarros == 1:
             self.canvas.itemconfig(self.car_yellow, fill="yellow")
             color = "Amarillo"
+            CARROS_AMARILLO.save_value({'value': 1})
         else:
             self.canvas.itemconfig(self.car_yellow, fill="yellow4")
+            CARROS_AMARILLO.save_value({'value': 0})
 
         if verdeCarros == 1:
             self.canvas.itemconfig(self.car_green, fill="lime")
             color = "Verde"
-
+            CARROS_VERDE.save_value({'value': 1})
         else:
             self.canvas.itemconfig(self.car_green, fill="darkgreen")
+            CARROS_VERDE.save_value({'value': 0})
 
         if rojoPeaton == 1:
             self.canvas.itemconfig(self.pedestrian_red, fill="red")
             pcolor = "Rojo"
+            PEATON_ROJO.save_value({'value': 1})
 
         else:
             self.canvas.itemconfig(self.pedestrian_red, fill="darkred")
+            PEATON_ROJO.save_value({'value': 0})
 
         if verdePeaton == 1:
             self.canvas.itemconfig(self.pedestrian_green, fill="lime")
             pcolor = "Verde"
+            PEATON_VERDE.save_value({'value': 1})
 
         else:
             self.canvas.itemconfig(self.pedestrian_green, fill="darkgreen")
+            PEATON_VERDE.save_value({'value': 0})
 
         texto_info = "Semaforo Carros: " + color + "\n"
         texto_info += "Semaforo Peatonal: " + pcolor + "\n"
@@ -177,31 +190,6 @@ class TrafficLights:
         self.tinfo.delete("1.0", END)
         self.tinfo.insert("1.0", texto_info)
         self.tinfo.after(100, self.update)
-
-
-def post_request(payload):
-        # Creates the headers for the HTTP requests
-    url = "http://industrial.api.ubidots.com"
-    url = "{}/api/v1.6/devices/{}".format(url, DEVICE_LABEL)
-    headers = {"X-Auth-Token": TOKEN, "Content-Type": "application/json"}
-
-    # Makes the HTTP requests
-    status = 400
-    attempts = 0
-    while status >= 400 and attempts <= 5:
-        req = requests.post(url=url, headers=headers, json=payload)
-        status = req.status_code
-        attempts += 1
-        sleep(1)
-
-    # Processes results
-    if status >= 400:
-        print("[ERROR] Could not send data after 5 attempts, please check \
-            your token credentials and internet connection")
-        return False
-
-    print("[INFO] request made properly, your device is updated")
-    return True
 
 
 TrafficLights()
