@@ -1,0 +1,49 @@
+﻿  CustomBox.cpp
+  CustomCone.cpp
+  CustomSphere.cpp
+  main.cpp
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomCone.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomSphere.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\CustomBox.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\main.cpp)
+  ofApp.cpp
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\ofApp.cpp)
+c:\users\santi\documents\visual studio 2017\open frameworks\apps\myapps\unityfinal\src\ofapp.cpp(232): warning C4804: '~': uso no seguro del tipo 'bool' en la operación
+  libusb-1.0.lib(core.obj) : se encontró .netmodule MSIL o un módulo compilado con /GL; reiniciando la vinculación con /LTCG; agregue /LTCG a la línea de comandos de vínculo para mejorar el rendimiento del vinculador
+LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificaci¾n '/LTCG'
+     Creando biblioteca bin\UnityFinal_debug.lib y objeto bin\UnityFinal_debug.exp
+  Generando c¾digo
+  Generaci¾n de c¾digo finalizada
+  UnityFinal.vcxproj -> C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\apps\myApps\UnityFinal\bin\UnityFinal_debug.exe
+  
+  	                   2	C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\libs\fmodex\lib\vs\x64\
+  	  *Archivo EXTRA		 6942208	C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\apps\myApps\UnityFinal\bin\FreeImage.dll
+  
+  	                   1	C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\libs\FreeImage\lib\vs\x64\
+  	  *Archivo EXTRA		 1503232	C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\apps\myApps\UnityFinal\bin\fmodex64.dll
+  	  *Archivo EXTRA		 1552384	C:\Users\santi\Documents\Visual Studio 2017\Open Frameworks\apps\myApps\UnityFinal\bin\fmodexL64.dll

@@ -1,0 +1,36 @@
+class Imprimir{
+    
+
+    field int length;
+    field Array a;
+   
+    
+    constructor Imprimir new(int l, Array na){
+        let length = l;
+        let a = na;
+        
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    
+    method void imprimir(){
+        var int i;
+        let i = 0;
+        while (i < length){
+            do Output.printString("Array ");
+            do Output.printString("[");
+            do Output.printInt(i);
+            do Output.printString("] ");
+            do Output.printString(": ");
+            do Output.printInt(a[i]);
+            do Output.println();
+            let i = i+1;
+        }
+        return;
+    }
+}

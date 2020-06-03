@@ -1,0 +1,11 @@
+class Main {
+    
+    function void main() {
+        var ArrayGenerator new;
+        do ArrayGenerator.newInstance();
+        let new = ArrayGenerator.getInstance();
+        do new.generator();
+        do new.dispose();
+        return;
+    }
+}

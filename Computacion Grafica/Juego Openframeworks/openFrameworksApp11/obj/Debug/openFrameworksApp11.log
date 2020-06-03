@@ -1,0 +1,15 @@
+﻿  ofApp.cpp
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(326): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(331): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(912): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(913): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(914): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+c:\users\santi\documents\universidad\computacion grafica\of_v0.11.0_vs2017_release\libs\openframeworks\math\ofmatrix4x4.h(915): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos
+  openFrameworksApp11.vcxproj -> C:\Users\santi\source\repos\openFrameworksApp11\openFrameworksApp11\bin\openFrameworksApp11_debug.exe
+  
+  	                   2	C:\Users\santi\Documents\Universidad\Computacion Grafica\of_v0.11.0_vs2017_release\libs\fmodex\lib\vs\x64\
+  	  *Archivo EXTRA		 6942208	C:\Users\santi\source\repos\openFrameworksApp11\openFrameworksApp11\bin\FreeImage.dll
+  
+  	                   1	C:\Users\santi\Documents\Universidad\Computacion Grafica\of_v0.11.0_vs2017_release\libs\FreeImage\lib\vs\x64\
+  	  *Archivo EXTRA		 1503232	C:\Users\santi\source\repos\openFrameworksApp11\openFrameworksApp11\bin\fmodex64.dll
+  	  *Archivo EXTRA		 1552384	C:\Users\santi\source\repos\openFrameworksApp11\openFrameworksApp11\bin\fmodexL64.dll

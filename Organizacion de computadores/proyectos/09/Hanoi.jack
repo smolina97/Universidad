@@ -1,0 +1,347 @@
+/** The Tower of Hanoi */
+class Hanoi {
+
+    // Private variables
+    field int discos;
+    field int numDiscosTorre1;
+    field int numDiscosTorre2;
+    field int numDiscosTorre3;
+    field int numTamTorre1;
+    field int numTamTorre2;
+    field int numTamTorre3;
+    field int numXTorre1;
+    field int numXTorre2;
+    field int numXTorre3;
+    // class-level variable
+    static int posDiscox10 ;// 50;    
+    static int posDiscoy1  ;// 200;
+    static int posDiscox9  ;// 55;
+    static int posDiscoy2  ;// 185;
+    static int posDiscox8  ;// 60;
+    static int posDiscoy3  ;// 170;
+    static int posDiscox7  ;// 65;
+    static int posDiscoy4  ;// 155;
+    static int posDiscox6  ;// 70;
+    static int posDiscoy5  ;// 140;
+    static int posDiscox5  ;// 75;
+    static int posDiscoy6  ;// 125;
+    static int posDiscox4  ;// 80;
+    static int posDiscoy7  ;// 110;
+    static int posDiscox3  ;// 85;
+    static int posDiscoy8  ;// 95;
+    static int posDiscox2  ;// 90;
+    static int posDiscoy9  ;// 80;
+    static int posDiscox1  ;// 95;
+    static int posDiscoy10 ;// 65;
+    static int tamDisco10  ;// 120;
+    static int tamDisco9   ;// 110;
+    static int tamDisco8   ;// 100;
+    static int tamDisco7   ;// 90;
+    static int tamDisco6   ;// 80;
+    static int tamDisco5   ;// 70;
+    static int tamDisco4   ;// 60;
+    static int tamDisco3   ;// 50;
+    static int tamDisco2   ;// 40;
+    static int tamDisco1   ;// 30;
+    static int tamAncho    ;// 10;
+    
+    constructor Hanoi new(int numDiscos) {
+	let posDiscox10 = 50;    
+	let posDiscoy1  = 200;
+	let posDiscox9  = 55;
+	let posDiscoy2  = 185;
+	let posDiscox8  = 60;
+	let posDiscoy3  = 170;
+	let posDiscox7  = 65;
+	let posDiscoy4  = 155;
+	let posDiscox6  = 70;
+	let posDiscoy5  = 140;
+	let posDiscox5  = 75;
+	let posDiscoy6  = 125;
+	let posDiscox4  = 80;
+	let posDiscoy7  = 110;
+	let posDiscox3  = 85;
+	let posDiscoy8  = 95;
+	let posDiscox2  = 90;
+	let posDiscoy9  = 80;
+	let posDiscox1  = 95;
+	let posDiscoy10 = 65;
+	let tamDisco10  = 120;
+	let tamDisco9   = 110;
+	let tamDisco8   = 100;
+	let tamDisco7   = 90;
+	let tamDisco6   = 80;
+	let tamDisco5   = 70;
+	let tamDisco4   = 60;
+	let tamDisco3   = 50;
+	let tamDisco2   = 40;
+	let tamDisco1   = 30;
+	let tamAncho    = 10;
+
+	let discos = numDiscos;
+	let numDiscosTorre1 = numDiscos;
+	let numDiscosTorre2 = 0;
+	let numDiscosTorre3 = 0;
+	// do repaint();//do repaint();
+	// do paintComponent();
+	return this;
+    }
+    method void empezar() {
+	let numTamTorre1 = inicioTD(discos);
+	let numXTorre1 = inicioX(discos, 0);
+	let numTamTorre2 = 0;
+	let numTamTorre3 = 0;
+	let numXTorre2 = 0;
+	let numXTorre3 = 0;
+	do Sys.wait(1000);//FALTA	
+	do repaint();//do repaint();
+	do resolver(discos, 0, 1, 2, inicioTD(discos));
+	return;
+    }
+    method void resolver(int n, int inicio, int auxiliar, int fin, int tamDisco) {
+	var int temporal;
+	if (n = 1) {
+	    if (inicio = 0) {
+		let numDiscosTorre1 = numDiscosTorre1 - 1;
+		if(numDiscosTorre1 = 0) {
+		    let numTamTorre1 = 0;
+		    let numXTorre1 = 0;
+		}	
+	    } if (inicio = 1) { //else if (inicio = 1) {	    
+		let numDiscosTorre2 = numDiscosTorre2 - 1;
+		if(numDiscosTorre2 = 0) {
+		    let numTamTorre2 = 0;
+		    let numXTorre2 = 0;
+		}	
+	    } if (inicio = 2) { //else if (inicio = 2) {
+		let numDiscosTorre3 = numDiscosTorre3 - 1;
+		if(numDiscosTorre3 = 0) {
+		    let numTamTorre3 = 0;
+		    let numXTorre3 = 0;
+		}	
+	    }
+	    if (fin = 0) {
+		let numDiscosTorre1 = numDiscosTorre1 + 1;
+		if(numTamTorre1 = 0) {
+		    let numTamTorre1 = tamDisco;
+		    let temporal = numDiscosTorre1;
+		    if (auxiliar = 1) {
+			let temporal = temporal + numDiscosTorre2;
+		    } else {
+			let temporal = temporal + numDiscosTorre3;
+		    }
+		    let numXTorre1 = inicioX(temporal, 0);
+		}
+	    } if (fin = 1) { //else if (fin = 1) {
+		let numDiscosTorre2 = numDiscosTorre2 + 1; 
+		if(numTamTorre2 = 0) {
+		    let numTamTorre2 = tamDisco;
+		    let temporal = numDiscosTorre2;
+		    if (auxiliar = 0) {
+			let temporal = temporal + numDiscosTorre1;
+		    } else {
+			let temporal = temporal + numDiscosTorre3;
+		    }
+		    let numXTorre2 = inicioX(temporal, 1);
+		}
+	    } if (fin = 2) { //else if (fin = 2) {
+		let numDiscosTorre3 = numDiscosTorre3 + 1;
+		if(numTamTorre3 = 0) {
+		    let numTamTorre3 = tamDisco;
+		    let temporal = numDiscosTorre3;
+		    if (auxiliar = 0) {
+			let temporal = temporal + numDiscosTorre1;
+		    } else {
+			let temporal = temporal + numDiscosTorre2;
+		    }
+		    let numXTorre3 = inicioX(temporal, 2);
+		}
+	    }
+	    // do Output.printInt(inicio);
+	    // do Output.printString(" -> "); // (inicio + " -> " + fin)
+	    // do Output.printInt(fin);
+	    // do Output.println();
+	    do Sys.wait(1000); //FALTA
+	    do repaint(); //do repaint();
+	} else {
+	    do resolver(n - 1, inicio, fin, auxiliar, tamDisco - 10);
+	    if (inicio = 0) {
+		let numDiscosTorre1 =  numDiscosTorre1 - 1;
+		if(numDiscosTorre1 = 0) {
+		    let numTamTorre1 = 0;
+		    let numXTorre1 = 0;
+		}	
+	    } if (inicio = 1) { //else if (inicio = 1) {
+		let numDiscosTorre2 = numDiscosTorre2 - 1;
+		if(numDiscosTorre2 = 0) {
+		    let numTamTorre2 = 0;
+		    let numXTorre2 = 0;
+		}	
+	    } if (inicio = 2) { //else if (inicio = 2) {
+		let numDiscosTorre3 = numDiscosTorre3 - 1;
+		if(numDiscosTorre3 = 0) {
+		    let numTamTorre3 = 0;
+		    let numXTorre3 = 0;
+		}	
+	    }
+	    if (fin = 0) {
+		let numDiscosTorre1 = numDiscosTorre1 + 1;
+		if(numTamTorre1 = 0) {
+		    let numTamTorre1 = tamDisco;
+		    let temporal = numDiscosTorre1;
+		    if (auxiliar = 1) {
+			let temporal = temporal + numDiscosTorre2;
+		    } else {
+			let temporal = temporal + numDiscosTorre3;
+		    }
+		    let numXTorre1 = inicioX(temporal, 0);
+		}
+	    } if (fin = 1) { //else if (fin = 1) {
+		let numDiscosTorre2 = numDiscosTorre2 + 1;
+		if(numTamTorre2 = 0) {
+		    let numTamTorre2 = tamDisco;
+		    let temporal = numDiscosTorre2;
+		    if (auxiliar = 0) {
+			let temporal = temporal + numDiscosTorre1;
+		    } else {
+			let temporal = temporal + numDiscosTorre3;
+		    }
+		    let numXTorre2 = inicioX(temporal, 1);
+		}
+	    } if (fin = 2) { //else if (fin = 2) {
+		let numDiscosTorre3 = numDiscosTorre3 + 1;
+		if(numTamTorre3 = 0) {
+		    let numTamTorre3 = tamDisco;
+		    let temporal = numDiscosTorre3;
+		    if (auxiliar = 0){
+			let temporal = temporal + numDiscosTorre1;
+		    } else {
+			let temporal = temporal + numDiscosTorre2;
+		    }
+		    let numXTorre3 = inicioX(temporal, 2);
+		}
+	    }
+	    do Sys.wait(1000); //FALTA
+	    do repaint(); //do repaint();
+	    // do Output.printInt(inicio);
+	    // do Output.printString(" -> "); // (inicio + " -> " + fin)
+	    // do Output.printInt(fin);
+	    // do Output.println();	    
+	    do resolver(n - 1, auxiliar, inicio, fin, tamDisco);
+	}
+	return;
+    }
+    method void dibujaTorres(){//Graphics2D g) { //FALTA
+	// g.setColor(Color.blue);
+	// Rectangle2D.Double torre1 = new Rectangle2D.Double(105,10,10,210);
+	do Screen.drawRectangle(105, 50, 115, 210);//(85, 35, 95, 235)
+	// Rectangle2D.Double torre2 = new Rectangle2D.Double(251,10,10,210);
+	do Screen.drawRectangle(250, 50, 260, 210);//(235, 35, 245, 235);
+	// Rectangle2D.Double torre3 = new Rectangle2D.Double(397,10,10,210);
+	do Screen.drawRectangle(398, 50, 408, 210);//(395, 35, 405, 235);
+	// g.fill(torre1);
+	// g.fill(torre2);
+	// g.fill(torre3);
+	// g.draw(torre1);
+	// g.draw(torre2);
+	// g.draw(torre3);
+	return;
+    } //
+    method int totalDiscos(int numTorre) {
+	if(numTorre = 0){
+	    return numDiscosTorre1;
+	} if(numTorre = 1) { //else if(numTorre = 1) {
+	    return numDiscosTorre2;
+	}
+	return numDiscosTorre3; 
+    }
+    method int inicioX(int numDiscos, int numTorre) {
+	if(numDiscos = 1) {
+	    return posDiscox1 + (146 * numTorre);
+	}if(numDiscos = 2) {
+	    return posDiscox2 + (146 * numTorre);
+	}if(numDiscos = 3){ 
+	    return posDiscox3 + (146 * numTorre);
+	}if(numDiscos = 4){ 
+	    return posDiscox4 + (146 * numTorre);
+	}if(numDiscos = 5) {
+	    return posDiscox5 + (146 * numTorre);
+	}if(numDiscos = 6) { 
+	    return posDiscox6 + (146 * numTorre);
+	}if(numDiscos = 7) {
+	    return posDiscox7 + (146 * numTorre);
+	}if(numDiscos = 8) {
+	    return posDiscox8 + (146 * numTorre);
+	}if(numDiscos = 9) {
+	    return posDiscox9 + (146 * numTorre);
+	}if(numDiscos = 10) {
+	    return posDiscox10 + (146 * numTorre);
+	}
+	return 0;
+    }
+    method int inicioTD(int numDiscos) {
+	if(numDiscos = 1) {
+	    return tamDisco1;
+	}if(numDiscos = 2) {
+	    return tamDisco2;
+	}if(numDiscos = 3) { 
+	    return tamDisco3;
+	}if(numDiscos = 4) {
+	    return tamDisco4;
+	}if(numDiscos = 5){ 
+	    return tamDisco5;
+	}if(numDiscos = 6){ 
+	    return tamDisco6;
+	}if(numDiscos = 7){ 
+	    return tamDisco7;
+	}if(numDiscos = 8){ 
+	    return tamDisco8;
+	}if(numDiscos = 9){ 
+	    return tamDisco9;
+	}if(numDiscos = 10){ 
+	    return tamDisco10;
+	}
+	return 0;
+    }
+    //FALTA
+    method void dibujaDiscos(int numTorre, int numDiscos, int numPosXini, int numPosYini, int numTamDisco) {// Falta -> Graphics2D g
+	// g.setColor(Color.blue);
+	// Rectangle2D.Double disco;
+	var int numTotalDiscos;
+	var int numTD;
+	let numTotalDiscos = numDiscos;
+	let numTD = numTamDisco;
+	while (numTotalDiscos > 0){ // do { -> Revisar
+	    // disco = new Rectangle2D.Double(numPosXini,numPosYini,numTD,tamAncho);
+	    do Screen.drawRectangle(numPosXini,numPosYini,numPosXini + numTD,numPosYini + tamAncho);//numPosXini,numPosYini,numTD,tamAncho);
+	    // g.fill(disco);
+	    // g.draw(disco);
+	    let numPosXini = numPosXini + 5;
+	    let numPosYini = numPosYini - 15;
+	    let numTD = numTD - 10;
+	    let numTotalDiscos = numTotalDiscos - 1;
+	}// } while (numTotalDiscos > 0);
+	return;
+    }
+    //FALTA
+    method void paintComponent() { //Graphics g) {
+	// super.paintComponent(g);
+	var int numTotalDiscos;
+	do dibujaTorres();// dibujaTorres((Graphics2D) g);	
+	let numTotalDiscos = totalDiscos(0);
+	// dibujaDiscos((Graphics2D) g, 0, numTotalDiscos, numXTorre1, posDiscoy1, numTamTorre1);
+	do dibujaDiscos( 0, numTotalDiscos, numXTorre1, posDiscoy1, numTamTorre1);
+	let numTotalDiscos = totalDiscos(1);
+	// dibujaDiscos((Graphics2D) g, 1, numTotalDiscos, numXTorre2, posDiscoy1, numTamTorre2);
+	do dibujaDiscos(1, numTotalDiscos, numXTorre2, posDiscoy1, numTamTorre2);
+	let numTotalDiscos = totalDiscos(2);
+	// dibujaDiscos((Graphics2D) g, 2, numTotalDiscos, numXTorre3, posDiscoy1, numTamTorre3);
+	do dibujaDiscos(2, numTotalDiscos, numXTorre3, posDiscoy1, numTamTorre3);
+	return;
+    }//
+    method void repaint() {
+	do Screen.clearScreen();
+	do paintComponent();
+	return;
+    }
+}

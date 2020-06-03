@@ -1,0 +1,13 @@
+function Main.main 1
+call ArrayGenerator.newInstance 0
+pop temp 0
+call ArrayGenerator.getInstance 0
+pop local 0
+push local 0
+call ArrayGenerator.generator 1
+pop temp 0
+push local 0
+call ArrayGenerator.dispose 1
+pop temp 0
+push constant 0
+return

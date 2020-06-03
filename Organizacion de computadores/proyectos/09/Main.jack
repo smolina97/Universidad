@@ -1,0 +1,27 @@
+class Main{
+    function void main() {
+	var int discos;
+	var Hanoi torresDeHanoi;
+	let discos = -1;
+	while ((discos = -1) | (discos < 1) | (discos > 10)) {
+	    let discos = Keyboard.readInt("Entre el numero de discos entre 1 y 10; 0 terminará el programa ");
+	} 
+	if ((discos > 0) & (discos < 11)) {
+	    //JFrame frame = new JFrame("Torres de Hanoi"); //
+	    let torresDeHanoi = Hanoi.new(discos); //Hanoi torresDeHanoi = new Hanoi(discos);
+	    // frame.add(torresDeHanoi);
+	    // frame.setResizable(false);
+	    // frame.pack();
+	    // frame.setTitle("Torres de Hanoi");
+	    // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    // frame.setSize(512,256);
+	    //do Screen.clearScreen();
+	    //do Output.printString("Torres de Hanoi");
+	    //do Output.println();
+	    // frame.setLocationRelativeTo(null);
+	    // frame.setVisible(true);
+	    do torresDeHanoi.empezar();
+	}
+	return;
+    }
+}

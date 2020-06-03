@@ -1,0 +1,48 @@
+class ArrayGenerator
+{
+    static ArrayGenerator instance;
+    field int length;
+    field Array a;
+    field Imprimir imprimir;
+
+    constructor ArrayGenerator new(){
+        let length = Keyboard.readInt("Length: ");
+        let a = Array.new(length);
+        let imprimir = Imprimir.new(length,a);
+        do generator();
+        return this;
+    }
+   function void newInstance() {
+        let instance = ArrayGenerator.new();
+        return;
+    }
+    
+
+    function ArrayGenerator getInstance() {
+        return instance;
+    }
+
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void generator ()
+    {
+  
+        var int i, sum;
+        let i = 0;
+        
+        while (i < length)
+        {
+            let a[i] = Keyboard.readInt("next: ");
+            let sum = sum + a[i];
+            let i = i+1;
+        }
+        do imprimir.imprimir();
+        return;
+    }
+}
+
+ 

@@ -1,0 +1,12 @@
+
+class Main {
+    
+    function void main() {
+        var Pong game;
+        do Pong.newInstance();
+        let game = Pong.getInstance();
+        do game.run();
+        do game.dispose();
+        return;
+    }
+}
