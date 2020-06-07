@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/smolin19/.arduino15/packages/arduino/tools/**",
+                "/home/smolin19/.arduino15/packages/arduino/hardware/avr/1.8.1/**"
+            ],
+            "forcedInclude": [
+                "/home/smolin19/.arduino15/packages/arduino/hardware/avr/1.8.1/cores/arduino/Arduino.h"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",
+            "defines": [
+                "USBCON"
+            ]
+        }
+    ],
+    "version": 4
+}

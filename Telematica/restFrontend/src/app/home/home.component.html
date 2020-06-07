@@ -1,0 +1,25 @@
+<br>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NOMBRES</th>
+      <th scope="col">APELLIDOS</th>
+      <th scope="col">CARGO</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let empleado of empleados">
+      <th> {{empleado.id}}</th>
+      <th> {{empleado.nombres}}</th>
+      <th> {{empleado.apellidos}}</th>
+      <th> {{empleado.cargo}}</th>
+      <th><button class="btn-primary btn-sm" routerLink="/formulario/{{empleado.id}}">Editar</button>
+          <button class="btn-primary btn-sm btn-danger" (click)="delete(empleado.id)">Eliminar</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>

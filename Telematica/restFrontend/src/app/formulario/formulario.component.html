@@ -1,0 +1,31 @@
+<br>
+<h2>Formulario del Empleado</h2>
+<div class="container">
+  <div>
+    <div class="form-group">
+      <label for="nombres">Nombres</label>
+      <input [(ngModel)]="empleados.nombres" type="text" class="form-control" id="nombres" placeholder="Ingresar Nombres">
+    </div>
+    <div class="form-group">
+      <label for="apellidos">Apellidos</label>
+      <input [(ngModel)]="empleados.apellidos" type="text" class="form-control" id="apellidos" placeholder="Ingresar Apellidos">
+    </div>
+    <div class="form-group">
+      <label for="edad">Edad</label>
+      <input [(ngModel)]="empleados.edad" type="number" class="form-control" id="edad" placeholder="Ingresar Edad">
+    </div>
+    <div class="form-group">
+      <label for="direccion">Direccion</label>
+      <input [(ngModel)]="empleados.direccion" type="text" class="form-control" id="direccion" placeholder="Ingresar Direccion">
+    </div>
+    <div class="form-group">
+      <label for="cargo">Cargo</label>
+      <input [(ngModel)]="empleados.cargo" type="text" class="form-control" id="cargo" placeholder="Ingresar Cargo">
+    </div>
+    <div class="form-group">
+      <label for="telefono">Telefono</label>
+      <input [(ngModel)]="empleados.telefono" type="text" class="form-control" id="telefono" placeholder="Ingresar Telefono">
+    </div>
+    <button  (click)="guardarEmpleado()"  class="btn btn-primary">Guardar</button>
+  </div>
+</div>
