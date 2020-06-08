@@ -133,7 +133,7 @@ public class MainActivity extends Activity{
      /*    the GET request withe the added data           */
     /*****************************************************/
 
-    private class Background_get extends AsyncTask<String, Void, String> {
+    private static class Background_get extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -141,7 +141,8 @@ public class MainActivity extends Activity{
                 URL url = new URL("http://192.168.137.143/?" + params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader
+                        (connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
                 String inputLine;
                 while ((inputLine = in.readLine()) != null)
