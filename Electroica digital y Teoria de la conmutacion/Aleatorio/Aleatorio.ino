@@ -17,7 +17,8 @@ int resultado = 0;
 int numero3 = 0;
 int puntuacion = 0;
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
   pinMode(startButton, INPUT);
   pinMode(mayor, INPUT);
@@ -27,15 +28,20 @@ void setup() {
   randomSeed(analogRead(0));
 }
 
-void loop() {
+void loop()
+{
   estado = digitalRead(startButton);
-  if (estado != estadoFin) {
+  if (estado != estadoFin)
+  {
     tCambio = millis();
   }
-  if ((millis() - tCambio) > tDelay) {
-    if (estado != estadoIni) {
+  if ((millis() - tCambio) > tDelay)
+  {
+    if (estado != estadoIni)
+    {
       estadoIni = estado;
-      if (estadoIni == LOW) {
+      if (estadoIni == LOW)
+      {
         Ale();
       }
     }
@@ -43,28 +49,34 @@ void loop() {
   estadoFin = estado;
 }
 
-void Ale() {
-  if (i < 4) {
+void Ale()
+{
+  if (i < 4)
+  {
     randNumber = random(1, 9);
     digitalWrite(randNumber, HIGH);
     delay(300);
     digitalWrite(randNumber, LOW);
     delay(600);
-    if (i == 0) {
+    if (i == 0)
+    {
       numero1 = randNumber;
       Serial.print("numero1:  ");
       Serial.println(numero1);
     }
 
-    if (i == 1) {
+    if (i == 1)
+    {
       numero2 = randNumber;
       Serial.print("numero2: ");
       Serial.println(numero2);
     }
 
-    if (i == 2) {
+    if (i == 2)
+    {
 
-      if (randNumber >= 0 && randNumber <= 3) {
+      if (randNumber >= 0 && randNumber <= 3)
+      {
         resultado = numero1 + numero2;
         Serial.print("suma: ");
         Serial.println(resultado);
@@ -73,7 +85,8 @@ void Ale() {
         Serial.println("O 34 si crees que esIGUAL al resultado");
       }
 
-      if (randNumber >= 4 && randNumber <= 6) {
+      if (randNumber >= 4 && randNumber <= 6)
+      {
         resultado = numero1 - numero2;
         Serial.print("resta: ");
         Serial.println(resultado);
@@ -82,7 +95,8 @@ void Ale() {
         Serial.println("O 34 si crees que esIGUAL al resultado");
       }
 
-      if (randNumber == 7) {
+      if (randNumber == 7)
+      {
         resultado = numero1 / numero2;
         Serial.print("division: ");
         Serial.println(resultado);
@@ -91,7 +105,8 @@ void Ale() {
         Serial.println("O 34 si crees que esIGUAL al resultado");
       }
 
-      if (randNumber >= 8 && randNumber <= 9) {
+      if (randNumber >= 8 && randNumber <= 9)
+      {
         resultado = numero1 * numero2;
         Serial.print("multiplicacion: ");
         Serial.println(resultado);
@@ -101,7 +116,8 @@ void Ale() {
       }
     }
 
-    if (i == 3) {
+    if (i == 3)
+    {
 
       randNumber = random(-9, 81);
       digitalWrite(randNumber, HIGH);
@@ -113,23 +129,30 @@ void Ale() {
     }
   }
   i++;
-  if ( i >= 4) {
+  if (i >= 4)
+  {
     i = 0;
   }
 }
 
-void resul() {
+void resul()
+{
   Serial.print("numero3: ");
   Serial.println(numero3);
-  if (digitalRead(mayor) == 1) {
-    if (resultado <  numero3) {
+  if (digitalRead(mayor) == 1)
+  {
+    if (resultado < numero3)
+    {
       Serial.print("Ganaste, Puntuacion = ");
       puntuacion++;
       Serial.println(puntuacion);
-    } else {
+    }
+    else
+    {
       Serial.print("Perdiste, Puntuacion = ");
       Serial.println(puntuacion);
-      if (puntuacion > record) {
+      if (puntuacion > record)
+      {
         record = puntuacion;
         Serial.print("Nuevo Record");
       }
@@ -138,15 +161,20 @@ void resul() {
       puntuacion = 0;
     }
   }
-  if (digitalRead(menor) == 1 && digitalRead(mayor) == 0 && digitalRead(igual) == 0) {
-    if (resultado >  numero3) {
+  if (digitalRead(menor) == 1 && digitalRead(mayor) == 0 && digitalRead(igual) == 0)
+  {
+    if (resultado > numero3)
+    {
       Serial.print("Ganaste, Puntuacion = ");
       puntuacion++;
       Serial.println(puntuacion);
-    } else {
+    }
+    else
+    {
       Serial.print("Perdiste, Puntuacion = ");
       Serial.println(puntuacion);
-      if (puntuacion > record) {
+      if (puntuacion > record)
+      {
         record = puntuacion;
         Serial.print("Nuevo Record");
       }
@@ -155,15 +183,20 @@ void resul() {
       puntuacion = 0;
     }
   }
-  if (digitalRead(igual) == 1 && digitalRead(mayor) == 0 && digitalRead(menor) == 0) {
-    if (resultado ==  numero3) {
+  if (digitalRead(igual) == 1 && digitalRead(mayor) == 0 && digitalRead(menor) == 0)
+  {
+    if (resultado == numero3)
+    {
       Serial.print("Ganaste, Puntuacion = ");
       puntuacion++;
       Serial.println(puntuacion);
-    } else {
+    }
+    else
+    {
       Serial.print("Perdiste, Puntuacion = ");
       Serial.println(puntuacion);
-      if (puntuacion > record) {
+      if (puntuacion > record)
+      {
         record = puntuacion;
         Serial.print("Nuevo Record");
       }
@@ -173,7 +206,8 @@ void resul() {
     }
   }
 
-  if (digitalRead(mayor) == 1 && digitalRead(menor) == 1 && (digitalRead(igual) == 1)) {
+  if (digitalRead(mayor) == 1 && digitalRead(menor) == 1 && (digitalRead(igual) == 1))
+  {
     Serial.print("Sacas 0 por Tranposo");
     puntuacion = 0;
     Serial.println(puntuacion);
