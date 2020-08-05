@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'>
+    <title>formulario Sencillo PHP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <br>
+    <div class="principal container col-md-4">
+        <h2> Formulario Sencillo</h2>
+        <br>
+        <form action="formulario.php" method="POST">
+            <div class="form-group">
+                <label>Nombres</label>
+                <label>
+                    <input type="text" class="form-control"
+                           placeholder="escriba sus nombres" name="nombres">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Apellidos</label>
+                <label>
+                    <input type="text" class="form-control"
+                           placeholder="escriba sus apelliods" name="apellidos">
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+</body>
