@@ -10,7 +10,7 @@
     }
 
     $sql = "INSERT INTO `usuarios` (`nombres`, `apellidos`)
-            VALUES ('$nombres', '$apellidos')";
+        VALUES ('$nombres', '$apellidos')";
 
     if (mysqli_query($conn, $sql)) {
         $message = "Usuario Creado";
