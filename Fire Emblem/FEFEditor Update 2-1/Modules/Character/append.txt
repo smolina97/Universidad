@@ -1,4 +1,0 @@
-MODULE_PATH/Character/Character.txt ENTRIES
-
-MODULE_PATH/Character/charID.txt HEX
-MODULE_PATH/Chapter/Character.txt HEX

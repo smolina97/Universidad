@@ -1,0 +1,317 @@
+P= 1.2
+
+Coche #1
+Pasajero: 64
+Pasajero: 63
+Pasajero: 144
+Pasajero: 88
+Pasajero: 185
+
+Coche #2
+Pasajero: 148
+Pasajero: 147
+Pasajero: 42
+Pasajero: 58
+Pasajero: 59
+
+Coche #3
+Pasajero: 197
+Pasajero: 149
+Pasajero: 130
+Pasajero: 131
+Pasajero: 140
+
+Coche #4
+Pasajero: 142
+Pasajero: 189
+Pasajero: 188
+Pasajero: 141
+Pasajero: 187
+
+Coche #5
+Pasajero: 44
+Pasajero: 143
+Pasajero: 176
+
+Coche #6
+Pasajero: 98
+Pasajero: 99
+Pasajero: 100
+Pasajero: 101
+Pasajero: 104
+
+Coche #7
+Pasajero: 102
+Pasajero: 103
+Pasajero: 105
+Pasajero: 106
+Pasajero: 51
+
+Coche #8
+Pasajero: 53
+Pasajero: 54
+Pasajero: 52
+Pasajero: 86
+Pasajero: 87
+
+Coche #9
+Pasajero: 136
+Pasajero: 5
+Pasajero: 6
+
+Coche #10
+Pasajero: 151
+Pasajero: 7
+Pasajero: 82
+Pasajero: 83
+Pasajero: 84
+
+Coche #11
+Pasajero: 66
+Pasajero: 47
+Pasajero: 48
+Pasajero: 49
+Pasajero: 50
+
+Coche #12
+Pasajero: 133
+Pasajero: 132
+Pasajero: 134
+Pasajero: 4
+Pasajero: 150
+
+Coche #13
+Pasajero: 137
+Pasajero: 81
+Pasajero: 56
+Pasajero: 57
+
+Coche #14
+Pasajero: 45
+Pasajero: 71
+Pasajero: 76
+Pasajero: 85
+Pasajero: 175
+
+Coche #15
+Pasajero: 156
+Pasajero: 182
+Pasajero: 183
+Pasajero: 163
+
+Coche #16
+Pasajero: 162
+Pasajero: 14
+Pasajero: 15
+Pasajero: 17
+Pasajero: 16
+
+Coche #17
+Pasajero: 184
+Pasajero: 43
+Pasajero: 11
+Pasajero: 139
+Pasajero: 145
+
+Coche #18
+Pasajero: 18
+Pasajero: 21
+Pasajero: 19
+Pasajero: 22
+Pasajero: 23
+
+Coche #19
+Pasajero: 24
+Pasajero: 40
+Pasajero: 41
+Pasajero: 20
+Pasajero: 26
+
+Coche #20
+Pasajero: 25
+Pasajero: 27
+Pasajero: 28
+Pasajero: 29
+Pasajero: 30
+
+Coche #21
+Pasajero: 31
+Pasajero: 32
+Pasajero: 33
+Pasajero: 34
+Pasajero: 35
+
+Coche #22
+Pasajero: 38
+Pasajero: 37
+Pasajero: 36
+Pasajero: 39
+Pasajero: 167
+
+Coche #23
+Pasajero: 62
+Pasajero: 61
+Pasajero: 159
+
+Coche #24
+Pasajero: 152
+Pasajero: 153
+Pasajero: 154
+Pasajero: 157
+Pasajero: 158
+
+Coche #25
+Pasajero: 164
+Pasajero: 160
+Pasajero: 161
+Pasajero: 165
+Pasajero: 166
+
+Coche #26
+Pasajero: 168
+Pasajero: 169
+Pasajero: 170
+Pasajero: 171
+Pasajero: 172
+
+Coche #27
+Pasajero: 179
+Pasajero: 180
+Pasajero: 181
+Pasajero: 10
+Pasajero: 65
+
+Coche #28
+Pasajero: 173
+Pasajero: 199
+Pasajero: 77
+Pasajero: 79
+
+Coche #29
+Pasajero: 69
+Pasajero: 68
+Pasajero: 70
+
+Coche #30
+Pasajero: 46
+Pasajero: 13
+Pasajero: 12
+Pasajero: 78
+Pasajero: 200
+
+Coche #31
+Pasajero: 60
+Pasajero: 3
+Pasajero: 2
+Pasajero: 92
+Pasajero: 96
+
+Coche #32
+Pasajero: 177
+Pasajero: 178
+Pasajero: 55
+
+Coche #33
+Pasajero: 95
+Pasajero: 97
+Pasajero: 108
+
+Coche #34
+Pasajero: 198
+Pasajero: 9
+Pasajero: 146
+
+Coche #35
+Pasajero: 190
+Pasajero: 192
+Pasajero: 191
+
+Coche #36
+Pasajero: 186
+Pasajero: 201
+Pasajero: 202
+
+Coche #37
+Pasajero: 129
+
+Coche #38
+Pasajero: 203
+Pasajero: 204
+Pasajero: 205
+
+Coche #39
+Pasajero: 8
+Pasajero: 135
+Pasajero: 114
+
+Coche #40
+Pasajero: 67
+Pasajero: 73
+Pasajero: 74
+
+Coche #41
+Pasajero: 72
+Pasajero: 94
+
+Coche #42
+Pasajero: 138
+
+Coche #43
+Pasajero: 75
+Pasajero: 93
+
+Coche #44
+Pasajero: 80
+Pasajero: 125
+
+Coche #45
+Pasajero: 107
+Pasajero: 116
+Pasajero: 109
+
+Coche #46
+Pasajero: 110
+Pasajero: 111
+
+Coche #47
+Pasajero: 112
+Pasajero: 113
+
+Coche #48
+Pasajero: 115
+Pasajero: 117
+Pasajero: 118
+
+Coche #49
+Pasajero: 122
+Pasajero: 119
+Pasajero: 120
+Pasajero: 195
+
+Coche #50
+Pasajero: 123
+Pasajero: 121
+
+Coche #51
+Pasajero: 124
+Pasajero: 126
+
+Coche #52
+Pasajero: 127
+Pasajero: 155
+Pasajero: 193
+
+Coche #53
+Pasajero: 194
+Pasajero: 90
+Pasajero: 89
+Pasajero: 91
+
+Coche #54
+Pasajero: 196
+
+Coche #55
+Pasajero: 128
+
+Coche #56
+Pasajero: 174

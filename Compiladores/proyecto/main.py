@@ -50,19 +50,16 @@ def main():
         rules_list.append(rules)
         chains_list.append(chains)
 
-        print(f"No terminales {i + 1} son:", no_terminals)
-        print(f"Las reglas {i + 1} son:", rules)
-        print(f"Las cadenas {i + 1} son:", chains)
-        print()
-
     archive_code.close()
 
     for idx, rule_dict in enumerate(rules_list):
-        print(f"Análisis LL(1) para el diccionario rules {idx + 1}:")
+      #  print(f"Análisis LL(1) para el diccionario rules {idx + 1}:")
         result = es_ll1(rule_dict)
-        print(f"Resultado para el diccionario rules {idx + 1}: {result}")
+       # print(f"Resultado para el diccionario rules {idx + 1}: {result}")
+
         if result == "cierto":
             analyzer(no_terminals_list[idx], rules_list[idx],chains_list[idx])
+        else: print("error gramatica ", rules_list[idx], "no es LL(1)")
         print()
 
 if __name__ == '__main__':
