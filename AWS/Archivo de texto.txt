@@ -1,5 +1,0 @@
-
-chmod 400 Server.cer      
-
-ssh -i "Server.cer" ubuntu@ec2-54-162-81-188.compute-1.amazonaws.com
- 
