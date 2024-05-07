@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "Trabajos"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "Trabajos\\KarelJRobot.jar",
+        "KarelJRobot.jar"
+    ]
+}

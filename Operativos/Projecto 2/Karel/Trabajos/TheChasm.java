@@ -36,10 +36,10 @@ public class TheChasm implements Directions {
     private static final Semaphore onlyOneCarInExtractionPoint = new Semaphore(1);
 
     //Condiciones para evitar que los hilos corran sin hacer nada
-    //Para evitar que los trenes ejecuten el while constatemente cuando esperan que los mineros terminen
+    //Para evitar que los trenes ejecuten el while constantemente cuando esperan que los mineros terminen
     private static final Lock lock = new ReentrantLock();
     private static final Condition nuevosBeepersDeLosMineros = lock.newCondition();
-    //Para evitar que los extractores ejecuten el while constatemente cuando esperan que los trenes terminen
+    //Para evitar que los extractores ejecuten el while constantemente cuando esperan que los trenes terminen
     private static final Lock lock2 = new ReentrantLock();
     private static final Condition nuevosBeepersDeLosTrenes = lock2.newCondition();
 
@@ -525,72 +525,6 @@ public class TheChasm implements Directions {
         }
     }
 
-/*
-    public static void ExtractorExterior(Car juanitoAlimana){
-        while(juanitoAlimana.beepersInBag < 5) {
-            while (!juanitoAlimana.nextToABeeper() && beepersInExtractionPoint > 0) {
-                moveRobot(juanitoAlimana);
-            }
-            while (juanitoAlimana.nextToABeeper() && juanitoAlimana.beepersInBag < 5) {
-                juanitoAlimana.pickBeeper();
-                juanitoAlimana.beepersInBag++;
-                beepersInExtractionPoint--;
-                System.out.println("Beepers in extraction point: " + beepersInExtractionPoint);
-            }
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.calleActual != 1){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.avenidaActual != 1){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.calleActual != 7){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.avenidaActual != 2){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.calleActual != 8){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.avenidaActual != 7){
-            moveRobot(juanitoAlimana);
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.calleActual != 7){
-            moveRobot(juanitoAlimana);
-        }
-        while (juanitoAlimana.beepersInBag > 0){
-            juanitoAlimana.putBeeper();
-            juanitoAlimana.beepersInBag--;
-        }
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        juanitoAlimana.turnLeft();
-        while (juanitoAlimana.avenidaActual != 3){
-            moveRobot(juanitoAlimana);
-        }
-    }
-*/
-
     public static void moveRobot(Car juanitoAlimana) {
         while (siguientePosicionOcupada(juanitoAlimana)) {
         }
@@ -610,7 +544,7 @@ public class TheChasm implements Directions {
                     juanitoAlimana.avenidaActual--;
                     break;
             }
-            //System.out.println("Coordenadas Ocupadas: "+ juanitoAlimana.calleActual + " " + juanitoAlimana.avenidaActual);
+            //System.out.println("Coordenadas Ocupadas: "+ juanitoAlimana.calleActual +"" + juanitoAlimana.avenidaActual);
         }
     }
 

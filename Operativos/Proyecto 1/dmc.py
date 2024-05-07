@@ -119,32 +119,32 @@ def main():
     print(f"Tiempo total transcurrido: {(end_time - start_time):.2f} segundos")
 
     # Calcular Pesos de cada archivo
-    sizeMP3 = len(mp3_content) / 1024 / 1024
-    sizeOGG = len(ogg_content) / 1024 / 1024
-    sizeFLAC = len(flac_content) / 1024 / 1024
+    size_mp3 = len(mp3_content) / 1024 / 1024
+    size_ogg = len(ogg_content) / 1024 / 1024
+    size_flac = len(flac_content) / 1024 / 1024
 
     # Mostrar opciones al usuario
     print("\nOpciones disponibles:")
-    print(f"1. MP3 (Tamaño Estimado: {sizeMP3:.2f}MB)")
-    print(f"2. OGG (Tamaño Estimado: {sizeOGG:.2f}MB)")
-    print(f"3. FLAC (Tamaño Estimado: {sizeFLAC:.2f}MB)")
+    print(f"1. MP3 (Tamaño Estimado: {size_mp3:.2f}MB)")
+    print(f"2. OGG (Tamaño Estimado: {size_ogg:.2f}MB)")
+    print(f"3. FLAC (Tamaño Estimado: {size_flac:.2f}MB)")
 
     while True:
-        opcion = input("Elija el formato que desea guardar en disco: ")
-        if opcion == "1":
+        option = input("Elija el formato que desea guardar en disco: ")
+        if option == "1":
             guardar_archivo(f"{os.path.splitext(os.path.basename(args.file))[0]}.mp3", mp3_content)
             break
-        elif opcion == "2":
+        elif option == "2":
             guardar_archivo(f"{os.path.splitext(os.path.basename(args.file))[0]}.ogg", ogg_content)
             break
-        elif opcion == "3":
+        elif option == "3":
             guardar_archivo(f"{os.path.splitext(os.path.basename(args.file))[0]}.flac", flac_content)
             break
         else:
             print("Opción no válida por favor elija entre las siguientes opciones")
-            print(f"1. MP3 (Tamaño Estimado: {sizeMP3:.2f}MB)")
-            print(f"2. OGG (Tamaño Estimado: {sizeOGG:.2f}MB)")
-            print(f"3. FLAC (Tamaño Estimado: {sizeFLAC:.2f}MB)")
+            print(f"1. MP3 (Tamaño Estimado: {size_mp3:.2f}MB)")
+            print(f"2. OGG (Tamaño Estimado: {size_ogg:.2f}MB)")
+            print(f"3. FLAC (Tamaño Estimado: {size_flac:.2f}MB)")
 
 
 if __name__ == "__main__":
