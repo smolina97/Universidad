@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 import java.util.Hashtable;
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //public class Minero extends Robot implements Directions
 public class Minero extends AugmentedRobot {
@@ -29,7 +31,7 @@ public class Minero extends AugmentedRobot {
 	private static final int CALLE_MINERO = 12;
 	private static final int CALLE_TREN = 14;
 	private static final int CALLE_ESPERA_EXT = 1;
-	private static final int BEEPERS_POR_BODEGA = 3000;
+	private static final int BEEPERS_POR_BODEGA = 300;
 	private static final int BEEPERS_EXTRACTOR = 50;
 	private static final int BEEPERS_MINERO = 50;
 	private static final int BEEPERS_TREN = 120;
@@ -144,15 +146,18 @@ public class Minero extends AugmentedRobot {
 			OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
 
 			String data = "";
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String timestamp = LocalDateTime.now().format(formatter);
 
 			if (tabla.equals("log")) {
-				data = "log= " + "tipoRobot: " + tipoRobot + " - id: " + id + " - "
-						+ "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
-						+ "beepers: " + beepersEnBolsa + " - " + mensaje;
+				data = "log= " + "timestamp: " + timestamp + " - " + "id: " + id + " - " + "tipoRobot: " + tipoRobot +  " - "
+       			 		+ "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
+        				+ "beepers: " + beepersEnBolsa + " - " + mensaje;
+
 			} else if (tabla.equals("robot")) {
 				String colorName = colorNames.getOrDefault(color, "UNKNOWN");
-				data = "robot= " + "tipoRobot: " + tipoRobot + " - id: " + id + " - " + colorName + " - " + "encendido: "
-						+ encendido + " - " + "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
+				data = "robot= " + "id: " + id + " - " + "tipoRobot: " + tipoRobot +  " - " + "color: " + colorName + " - "
+						+ "encendido: " + encendido + " - " + "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
 						+ "beepers: " + beepersEnBolsa;
 			}
 
@@ -389,8 +394,6 @@ public class Minero extends AugmentedRobot {
 	private void procesar() {
 		ejecutarLog = debugHabilitado && logMensaje("Inicio proceso");
 		to_database("Inicio proceso", "log");
-		encendido = true;
-		to_database("Robot encendido", "robot");
 		switch (tipoRobot) {
 			case TIPO_MINERO:
 				procesarMinero();
@@ -930,7 +933,7 @@ public class Minero extends AugmentedRobot {
 	// Setup Karel World
 	private static void setupWorld(String mundo) {
 		World.readWorld(mundo);
-		World.setDelay(10);
+		World.setDelay(5);
 		World.setVisible(true);
 		World.showSpeedControl(true, true); // Needed to make them start
 	}
@@ -940,6 +943,7 @@ public class Minero extends AugmentedRobot {
 		asignarVariablesEstaticas();
 		validarArgumentos(args);
 		setupWorld("Mina.kwld");
+		
 		// Creates robots in the world
 		int id = 1;
 		id = crearRobots(TIPO_MINERO, id);
