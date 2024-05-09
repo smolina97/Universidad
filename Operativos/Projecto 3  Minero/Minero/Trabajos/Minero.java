@@ -542,7 +542,7 @@ public class Minero extends AugmentedRobot {
 		// Delivers all beepers that it has in the bag...
 		ejecutarLog = debugHabilitado && logMensaje("Dejando beepers");
 		for (int i = beepers; i > 0; i--) {
-			System.out.println(i);
+			//System.out.println(i);
 			putBeeper();
 			beepersEnBolsa = i;
 			to_database("Dejando beepers", "log");
