@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "../Projecto 3  Minero/Minero"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src",
+			"Trabajos"
+		],
+		"java.project.outputPath": "bin",
+		"java.project.referencedLibraries": [
+			"Trabajos\\KarelJRobot.jar",
+			"KarelJRobot.jar"
+		]
+	}
+}

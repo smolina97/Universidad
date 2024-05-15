@@ -1,7 +1,11 @@
 import kareltherobot.*;
 import java.awt.Color;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +35,7 @@ public class Minero extends AugmentedRobot {
 	private static final int CALLE_MINERO = 12;
 	private static final int CALLE_TREN = 14;
 	private static final int CALLE_ESPERA_EXT = 1;
-	private static final int BEEPERS_POR_BODEGA = 300;
+	private static final int BEEPERS_POR_BODEGA = 3000;
 	private static final int BEEPERS_EXTRACTOR = 50;
 	private static final int BEEPERS_MINERO = 50;
 	private static final int BEEPERS_TREN = 120;
@@ -80,6 +84,7 @@ public class Minero extends AugmentedRobot {
 	private static Semaphore sem_trenes;
 	private static Semaphore sem_trenInicioProceso;
 	private static Semaphore sem_trenSalida;
+	private static Semaphore sem_todatabase;
 
 	// Constructor for Minero class. Extends the AugmentedRobot and adds two
 	// parameters:
@@ -87,6 +92,8 @@ public class Minero extends AugmentedRobot {
 	// id : number that unique identifies the robot. Don't use the RobotID attrib
 	// from Parent classes.
 	public Minero(int street, int avenue, Direction direction, int beeps, Color color, int tipo, int id) {
+
+		
 		// Invokes the parent and fill attributes
 		super(street, avenue, direction, beeps, color);
 		avenidaInicial = avenue;
@@ -107,7 +114,7 @@ public class Minero extends AugmentedRobot {
 
 	// Runnable method that starts the thread
 	public void run() {
-		ejecutarMina();
+		ejecutarMina();	
 	}
 
 	// Determine move direction on the Street
@@ -139,11 +146,9 @@ public class Minero extends AugmentedRobot {
 		colorNames.put(Color.BLUE, "BLUE");
 		colorNames.put(Color.RED, "RED");
 	}
-
+	
 	private boolean to_database(String mensaje, String tabla) {
 		try {
-			Socket socket = new Socket("localhost", 12345);
-			OutputStreamWriter out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
 
 			String data = "";
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -151,8 +156,8 @@ public class Minero extends AugmentedRobot {
 
 			if (tabla.equals("log")) {
 				data = "log= " + "timestamp: " + timestamp + " - " + "id: " + id + " - " + "tipoRobot: " + tipoRobot +  " - "
-       			 		+ "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
-        				+ "beepers: " + beepersEnBolsa + " - " + mensaje;
+						+ "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
+						+ "beepers: " + beepersEnBolsa + " - " + mensaje;
 
 			} else if (tabla.equals("robot")) {
 				String colorName = colorNames.getOrDefault(color, "UNKNOWN");
@@ -160,14 +165,15 @@ public class Minero extends AugmentedRobot {
 						+ "encendido: " + encendido + " - " + "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
 						+ "beepers: " + beepersEnBolsa;
 			}
-
+			data += "\n";
+			System.out.println(data);
 			out.write(data);
-			out.close();
-			socket.close();
+			out.flush();
+
 		} catch (Exception e) {
+			guardarError(e.getMessage());
 			e.printStackTrace();
 		}
-
 		return true;
 	}
 
@@ -195,6 +201,7 @@ public class Minero extends AugmentedRobot {
 			calleActual = nuevaCalle;
 			avenidaActual = nuevaAvenida;
 		} catch (InterruptedException exc) {
+			guardarError(exc.getMessage());
 			System.out.println(exc);
 		}
 		// Finally, releases the semaphore
@@ -240,6 +247,7 @@ public class Minero extends AugmentedRobot {
 						to_database("En punto de espera por beepers", "log");
 						sem_extraccion.acquire();
 					} catch (InterruptedException exc) {
+						guardarError(exc.getMessage());
 						System.out.println(exc);
 					}
 				}
@@ -265,6 +273,7 @@ public class Minero extends AugmentedRobot {
 				ejecutarLog = debugHabilitado && logMensaje("Esperando por la salida de todos los mineros");
 				sem_trenes.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 		}
@@ -273,6 +282,7 @@ public class Minero extends AugmentedRobot {
 				ejecutarLog = debugHabilitado && logMensaje("Esperando por la salida de los mineros y trenes");
 				sem_extractor.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 		}
@@ -289,6 +299,7 @@ public class Minero extends AugmentedRobot {
 					ejecutarLog = debugHabilitado && logMensaje("Solo el último minero puede activar los trenes");
 					sem_salida.acquire();
 				} catch (InterruptedException exc) {
+					guardarError(exc.getMessage());
 					System.out.println(exc);
 				}
 				while (sem_trenes.availablePermits() <= (cantidadTrenes - 1))
@@ -305,6 +316,7 @@ public class Minero extends AugmentedRobot {
 					ejecutarLog = debugHabilitado && logMensaje("Solo el último tren puede activar los extractores");
 					sem_salida.acquire();
 				} catch (InterruptedException exc) {
+					guardarError(exc.getMessage());
 					System.out.println(exc);
 				}
 				while (sem_extractor.availablePermits() <= (cantidadExtractores - 1))
@@ -320,6 +332,7 @@ public class Minero extends AugmentedRobot {
 				ejecutarLog = debugHabilitado && logMensaje("Espero si puedo entrar a la mina");
 				sem_extIngreso.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 		}
@@ -369,6 +382,7 @@ public class Minero extends AugmentedRobot {
 				to_database("Espero que hayan " + BEEPERS_TREN + " beepers para recogerlos.", "log");
 				sem_trenInicioProceso.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 		}
@@ -460,6 +474,7 @@ public class Minero extends AugmentedRobot {
 			try {
 				sem_extIngreso.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 			if (!extraccionCompleta) {
@@ -544,7 +559,7 @@ public class Minero extends AugmentedRobot {
 		for (int i = beepers; i > 0; i--) {
 			//System.out.println(i);
 			putBeeper();
-			beepersEnBolsa = i;
+			beepersEnBolsa--;
 			to_database("Dejando beepers", "log");
 		}
 		// ... and goes back to the vein delivery point
@@ -576,6 +591,7 @@ public class Minero extends AugmentedRobot {
 				try {
 					sem_trenSalida.acquire();
 				} catch (InterruptedException exc) {
+					guardarError(exc.getMessage());
 					System.out.println(exc);
 				}
 				ejecutarLog = debugHabilitado && logMensaje("Saliendo a casa");
@@ -632,6 +648,7 @@ public class Minero extends AugmentedRobot {
 				try {
 					sem_mineros.acquire();
 				} catch (InterruptedException exc) {
+					guardarError(exc.getMessage());
 					System.out.println(exc);
 				}
 			}
@@ -680,6 +697,7 @@ public class Minero extends AugmentedRobot {
 			try {
 				sem_mineros.acquire();
 			} catch (InterruptedException exc) {
+				guardarError(exc.getMessage());
 				System.out.println(exc);
 			}
 			mover();
@@ -928,6 +946,7 @@ public class Minero extends AugmentedRobot {
 		Minero.sem_trenes = new Semaphore(0);
 		Minero.sem_trenInicioProceso = new Semaphore(0);
 		Minero.sem_trenSalida = new Semaphore(0);
+		Minero.sem_todatabase = new Semaphore(1);
 	}
 
 	// Setup Karel World
@@ -938,11 +957,48 @@ public class Minero extends AugmentedRobot {
 		World.showSpeedControl(true, true); // Needed to make them start
 	}
 
+	private static Socket socket;
+	private static OutputStreamWriter out;
+
+	public static void connect() {
+        try {
+            socket = new Socket("localhost", 12345);
+            out = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
+        } catch (UnknownHostException e) {
+            guardarError("Host desconocido: " + e.getMessage());
+        } catch (IOException e) {
+            guardarError("Error de E/S: " + e.getMessage());
+        }
+    }
+
+    private static void guardarError(String mensaje) {
+		String rutaArchivoErrores = "errores.txt";
+		try (PrintStream errorStream = new PrintStream(new FileOutputStream(rutaArchivoErrores, true))) {
+			errorStream.println(mensaje);
+		} catch (IOException ex) {
+			guardarError(ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	public static void disconnect() {
+		try {
+			out.close();
+			socket.close();
+			System.out.println("Desconectado");
+		} catch (IOException e) {
+			guardarError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	// Main method
 	public static void main(String[] args) throws InterruptedException {
+		
 		asignarVariablesEstaticas();
 		validarArgumentos(args);
 		setupWorld("Mina.kwld");
+
+		connect();
 		
 		// Creates robots in the world
 		int id = 1;
@@ -951,8 +1007,18 @@ public class Minero extends AugmentedRobot {
 		id = crearRobots(TIPO_EXTRACTOR, id);
 
 		// Initialize the threads
-		for (int i = 0; i < objThreads.size(); i++)
+		for (int i = 0; i < objThreads.size(); i++){
 			objThreads.get(i).start();
+		}
+		try {
+			for (int i = 0; i < objThreads.size(); i++){
+				objThreads.get(i).join();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		disconnect();
 	}
 }
 
