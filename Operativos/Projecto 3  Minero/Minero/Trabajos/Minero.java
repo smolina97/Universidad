@@ -193,6 +193,7 @@ public class Minero extends AugmentedRobot {
 			// When position is free, uses sem_move to lock all robots that tries to move.
 			sem_move.acquire();
 			ejecutarLog = debugHabilitado && logMensaje("Me muevo");
+			to_database("me muevo", "robot");
 			move();
 			posicion = calleActual + " - " + avenidaActual;
 			// Release previous position where it was and update robot atrributes
@@ -219,6 +220,7 @@ public class Minero extends AugmentedRobot {
 		move();
 		calleActual = nuevaCalle;
 		avenidaActual = nuevaAvenida;
+		to_database("me muevo en la mina", "robot");
 	}
 
 	// Enter to the mine. All robots use it but do different things.
@@ -804,7 +806,9 @@ public class Minero extends AugmentedRobot {
 		ejecutarLog = debugHabilitado && logMensaje("Hora de dormir. Dulces sueños.");
 		turnOff();
 		encendido = false;
+		to_database("robot apagado","log");
 		to_database("Hora de dormir. Dulces sueños.", "robot");
+
 	}
 
 	// Moves to the Train dropoff point when exit.

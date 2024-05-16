@@ -1,8 +1,8 @@
 import asyncio
 import re
-import shelve
 import threading
 import pandas
+
 
 
 direccion_servidor = ('localhost', 12345)
@@ -104,27 +104,37 @@ async def procesar_mensaje(mensaje, robots, logs):
 
 async def guardar_datos(robots, logs):
     if robots:  # Verificar que la lista no esté vacía
-        with shelve.open('robots.db') as db:
-            db['robots'] = robots
+        df_robots = pandas.DataFrame(robots)
+        df_robots.to_csv('robots.csv', index=False, encoding='utf-8')
     if logs:  # Verificar que la lista no esté vacía
-        with shelve.open('logs.db') as db:
-            db['logs'] = logs
+        df_logs = pandas.DataFrame(logs)
+        df_logs.to_csv('logs.csv', index=False, encoding='utf-8')
+
 
 async def guardar_datos_periodicamente(robots, logs):
     while True:
+        if cola_robot and cola_log:
         # Guardar los datos
-        await guardar_datos(robots, logs)
-        # Esperar un cierto tiempo antes de guardar los datos de nuevo
-        await asyncio.sleep(0.5) 
+            await guardar_datos(robots, logs)
+            # Esperar un cierto tiempo antes de guardar los datos de nuevo
+            await asyncio.sleep(0.5) 
 
 def cargar_datos():
     global robots, logs
-    with shelve.open('robots.db') as db:
-        robots = db.get('robots', [])
-    with shelve.open('logs.db') as db:
-        logs = db.get('logs', [])
-
-    print("Datos anteriores cargados")
+    try:
+        robots = pandas.read_csv('robots.csv').to_dict('records')
+        print("Datos anteriores de Robots cargados")
+    except FileNotFoundError:
+        print("No se encontraron datos anteriores de Robots")
+        robots = []
+    try:
+        logs = pandas.read_csv('logs.csv').to_dict('records')
+        print("Datos anteriores de Logs cargados")
+    except FileNotFoundError:
+        print("No se encontraron datos anteriores de Logs")
+        logs = []
+    # print("robots: ", robots)
+    # print("logs: ", logs)
     return robots, logs
 
 async def procesar_datos(reader, writer, robots, logs):
@@ -209,12 +219,14 @@ def mostrar_menu():
                 valor = input("Valor: ")
 
         resultados = realizar_busqueda(tabla, tipoBusqueda, valor, robots, logs)
+        
         df = pandas.DataFrame(resultados)
         print(df)
 
         # Guardar el DataFrame en un archivo de Excel
-        filename = f"consulta_{tabla}.xlsx"
-        df.to_excel(filename, index=False)
+        filename = f"consulta_{tabla}.csv"
+        df.to_csv(filename, index=False)
+        print(f"La consulta se ha guardado en el archivo: {filename}")
 
         tabla = ""
         tipoBusqueda = ""
@@ -232,10 +244,10 @@ def realizar_busqueda(table, searchType, value, robots, logs):
     else:
         for elemento in vectorBusqueda:
             if searchType == "id":
-                if elemento["id"] == value:
+                if str(elemento["id"]) == str(value):
                     resultados.append(elemento)
             elif searchType == "robotType":
-                if elemento["tipoRobot"] == value:
+                if str(elemento["tipoRobot"]) == str(value):
                     resultados.append(elemento)
 
     return resultados
