@@ -35,7 +35,7 @@ public class Minero extends AugmentedRobot {
 	private static final int CALLE_MINERO = 12;
 	private static final int CALLE_TREN = 14;
 	private static final int CALLE_ESPERA_EXT = 1;
-	private static final int BEEPERS_POR_BODEGA = 3000;
+	private static final int BEEPERS_POR_BODEGA = 800;
 	private static final int BEEPERS_EXTRACTOR = 50;
 	private static final int BEEPERS_MINERO = 50;
 	private static final int BEEPERS_TREN = 120;
@@ -164,6 +164,9 @@ public class Minero extends AugmentedRobot {
 				data = "robot= " + "id: " + id + " - " + "tipoRobot: " + tipoRobot +  " - " + "color: " + colorName + " - "
 						+ "encendido: " + encendido + " - " + "calle: " + calleActual + " - " + "avenida: " + avenidaActual + " - "
 						+ "beepers: " + beepersEnBolsa;
+
+			}else if (tabla.equals("estado")){
+				data = "estado" + "timestamp: " + timestamp + "-"+ "estado: " + mensaje;
 			}
 			data += "\n";
 			System.out.println(data);
@@ -172,7 +175,7 @@ public class Minero extends AugmentedRobot {
 
 		} catch (Exception e) {
 			guardarError(e.getMessage());
-			e.printStackTrace();
+			System.out.println("Error al enviar mensaje al servidor - base de datos no conectada");
 		}
 		return true;
 	}
@@ -1003,6 +1006,19 @@ public class Minero extends AugmentedRobot {
 		setupWorld("Mina.kwld");
 
 		connect();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = LocalDateTime.now().format(formatter);
+        String data = "estado= " + "timestamp: " + timestamp + " - estado: Programa Activo";
+        data += "\n";
+        System.out.println(data);
+        try {
+            out.write(data);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al enviar mensaje al servidor - base de datos no conectada");
+        }
 		
 		// Creates robots in the world
 		int id = 1;
@@ -1014,12 +1030,24 @@ public class Minero extends AugmentedRobot {
 		for (int i = 0; i < objThreads.size(); i++){
 			objThreads.get(i).start();
 		}
+		
 		try {
 			for (int i = 0; i < objThreads.size(); i++){
 				objThreads.get(i).join();
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+
+		data = "estado= " + "timestamp: " + LocalDateTime.now().format(formatter) + " - estado: Programa Finalizado";
+		data += "\n";
+		System.out.println(data);
+		try {
+			out.write(data);
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al enviar mensaje al servidor - base de datos no conectada");
 		}
 		
 		disconnect();
