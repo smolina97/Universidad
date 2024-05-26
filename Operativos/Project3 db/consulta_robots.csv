@@ -1,7 +1,7 @@
 id,tipoRobot,color,encendido,calle,avenida,beepers
-1,1,BLACK,false,12,8,0
-2,1,BLACK,false,12,9,0
-3,2,BLUE,false,14,8,0
-4,2,BLUE,false,14,9,0
-5,3,RED,false,16,8,0
-6,3,RED,false,16,9,0
+1,1,BLACK,true,10,14,0
+2,1,BLACK,true,10,13,0
+3,2,BLUE,true,11,11,0
+4,2,BLUE,true,2,3,120
+5,3,RED,true,7,4,0
+6,3,RED,true,8,7,50
